@@ -7,9 +7,7 @@ import { LoginComponent } from './Layout/login/login.component';
 import { ForgetpasswordComponent } from './Layout/forgetpassword/forgetpassword.component';
 import { SignUpComponent } from './Layout/sign-up/sign-up.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
-import { AnimalsComponent } from './Dashboard/dashboard/animals/animals.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './main-layout/header/header.component';
 import { FooterComponent } from './main-layout/footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -17,6 +15,7 @@ import { ContactComponent } from './homepage/contact/contact.component';
 import { ResetPasswordComponent } from './Layout/reset-password/reset-password.component'; // ✅ Import this
 import { RouterModule } from '@angular/router';
 import { OnlyNumberDirective } from './only-number.directive';
+<<<<<<< HEAD
 import{ApiService} from './api.service';
 import { SettingsComponent } from './Dashboard/dashboard/settings/settings.component'
 import { FeedInventoryComponent } from './Dashboard/dashboard/feed-inventory/feed-inventory.component';
@@ -31,6 +30,9 @@ import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.compo
 
 
 
+=======
+import { ApiService } from './api.service';
+>>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
 
 @NgModule({
   declarations: [
@@ -38,13 +40,13 @@ import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.compo
     LoginComponent,
     ForgetpasswordComponent,
     SignUpComponent,
-    DashboardComponent,
     HeaderComponent,
     FooterComponent,
     HomepageComponent,
     ContactComponent,
     ResetPasswordComponent,
     OnlyNumberDirective,
+<<<<<<< HEAD
     AnimalsComponent,
     CustomersComponent,
     VendorComponent,
@@ -55,6 +57,8 @@ import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.compo
     SettingsComponent,
     FeedInventoryComponent
     
+=======
+>>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
   ],
   imports: [
     BrowserModule,
@@ -62,11 +66,9 @@ import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
-    
-
+    RouterModule,
   ],
   providers: [ApiService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

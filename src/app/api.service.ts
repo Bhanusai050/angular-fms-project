@@ -1,3 +1,4 @@
+// src/app/services/api.service.ts
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,13 +7,14 @@ import { tap, catchError } from 'rxjs/operators';
 
 export interface LoginResponse {
   token: string;
-  // Add more fields if needed
+  // Extend if your API response contains more fields
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+<<<<<<< HEAD
   // 🧑‍💼 ADD CUSTOMER - Add a new customer record
   addCustomer(customerData: any): Observable<any> {
     return this.http.post(
@@ -34,14 +36,16 @@ export class ApiService {
     );
   }
   private baseUrl = 'https://localhost:44394';  // ✅ Your actual API root (no /api or /Help)
+=======
+  private baseUrl = 'https://localhost:44394'; // Your backend URL
+>>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
 
   constructor(private http: HttpClient) {}
 
-
-  // 🐾 ADD ANIMAL - Add a new animal record
+  // ✅ ADD ANIMAL - POST: /api/animals/add
   addAnimal(animalData: any): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}/api/animals`,
+      `${this.baseUrl}/api/animals/add`, // ✅ Correct route
       animalData,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -59,7 +63,7 @@ export class ApiService {
     );
   }
 
-  // 📨 CONTACT US - Submit contact form
+  // ✅ CONTACT US - Submit contact form
   submitContact(formData: { name: string; phoneNumber: string; email: string; message: string }): Observable<any> {
     return this.http.post(
       `${this.baseUrl}/api/Postcontactmessages`,
@@ -83,7 +87,7 @@ export class ApiService {
   // ✅ SIGN UP - Register new user
   register(data: any): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}/register`, // ✅ Corrected route
+      `${this.baseUrl}/register`, // Ensure this is the correct backend route
       data,
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -101,10 +105,10 @@ export class ApiService {
     );
   }
 
-  // 🔐 LOGIN - Main login API
+  // 🔐 LOGIN - Authenticate user
   login(email: string, password: string, remember: boolean): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
-      `${this.baseUrl}/login`, // ✅ Correct route
+      `${this.baseUrl}/login`, // Ensure backend route matches
       { email, password },
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -133,7 +137,7 @@ export class ApiService {
   // 📧 FORGOT PASSWORD - Send OTP
   sendOtp(email: string): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}/send-otp`, // ✅ Correct route
+      `${this.baseUrl}/send-otp`, // Make sure your backend has this route
       { email },
       {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -145,6 +149,121 @@ export class ApiService {
           : err.status >= 400 && err.status < 500
             ? 'Invalid request – check email.'
             : 'Server error – please try again.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ UPDATE ANIMAL - PUT: /api/animals/update/{id}
+  updateAnimal(id: number, animalData: any): Observable<any> {
+    return this.http.put(
+      `${this.baseUrl}/api/animals/update/${id}`,
+      animalData,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      }
+    ).pipe(
+      tap(res => console.log('✅ Animal updated:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ GET ANIMALS - GET: /api/animals/get
+  getAnimals(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/api/animals/get`,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      }
+    ).pipe(
+      tap(res => console.log('✅ Animals fetched:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ ADD CUSTOMER - POST: /api/customers/add
+  addCustomer(customerData: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/api/customers/add`,
+      customerData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Customer added:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ GET CUSTOMERS - GET: /api/customers/all
+  getCustomers(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/api/customers/all`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Customers fetched:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ UPDATE CUSTOMER - PUT: /api/customers/update/{id}
+  updateCustomer(id: number, customerData: any) {
+    return this.http.put(
+      `${this.baseUrl}/api/customers/update/${id}`,
+      customerData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Customer updated:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ DELETE CUSTOMER - DELETE: /api/customers/delete/{id}
+  deleteCustomer(id: number) {
+    return this.http.delete(
+      `${this.baseUrl}/api/customers/delete/${id}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Customer deleted:', id)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
         return throwError(() => new Error(msg));
       })
     );

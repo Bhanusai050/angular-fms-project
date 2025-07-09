@@ -63,14 +63,9 @@
 
           <select class="form-select" id="animalType" formControlName="animalType" [class.is-invalid]="
          animalForm.get('animalType')?.touched &&
-         animalForm.get('animalType')?.invalid
-        ">
-            <option [value]="null">-- Select Animal type --</option>
-            <option>Sheep</option>
-            <option>Goat</option>
-            <option>Hen</option>
-            <option>Beffalo</option>
-            <option>Cow</option>
+         animalForm.get('animalType')?.invalid">
+            <option [ngValue]="null">-- Select Animal type --</option>
+            <option *ngFor="let type of animalTypes" [ngValue]="type.id">{{ type.name }}</option>
           </select>
 
           <div class="invalid-feedback" *ngIf="
@@ -85,11 +80,9 @@
           <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
           <select class="form-select" id="gender" formControlName="gender" [class.is-invalid]="
          animalForm.get('gender')?.touched &&
-         animalForm.get('gender')?.invalid
-        ">
-            <option [value]="null">--Select Gender--</option>
-            <option>Male</option>
-            <option>Female</option>
+         animalForm.get('gender')?.invalid">
+            <option [ngValue]="null">--Select Gender--</option>
+            <option *ngFor="let g of genders" [ngValue]="g.id">{{ g.name }}</option>
           </select>
           <div class="invalid-feedback" *ngIf="
           animalForm.get('gender')?.touched &&
@@ -103,13 +96,9 @@
           <label for="healthStatus" class="form-label">Health Status <span class="text-danger">*</span></label>
           <select class="form-select" id="healthStatus" formControlName="healthStatus" [class.is-invalid]="
          animalForm.get('healthStatus')?.touched &&
-         animalForm.get('healthStatus')?.invalid
-        ">
-            <option [value]="null">--Select Health Status--</option>
-            <option>Sick</option>
-            <option>Healthy</option>
-            <option>Injured</option>
-            <option>Recovering</option>
+         animalForm.get('healthStatus')?.invalid">
+            <option [ngValue]="null">--Select Health Status--</option>
+            <option *ngFor="let h of healthStatuses" [ngValue]="h.id">{{ h.name }}</option>
           </select>
           <div class="invalid-feedback" *ngIf="
           animalForm.get('healthStatus')?.touched &&
@@ -176,15 +165,11 @@
         </div>
         <div class="col-md-4">
           <label for="animalStatus" class="form-label">Animal Status <span class="text-danger">*</span></label>
-          <select class="form-select" id="animalStatus" formControlName="animalStatus"
-           [class.is-invalid]="
+          <select class="form-select" id="animalStatus" formControlName="animalStatus" [class.is-invalid]="
          animalForm.get('animalStatus')?.touched &&
-         animalForm.get('animalStatus')?.invalid
-        ">
-            <option [value]="null">--Select Animal Status--</option>
-            <option>Death</option>
-            <option>Sold</option>
-            <option>Active</option>
+         animalForm.get('animalStatus')?.invalid">
+            <option [ngValue]="null">--Select Animal Status--</option>
+            <option *ngFor="let s of animalStatuses" [ngValue]="s.id">{{ s.name }}</option>
           </select>
           <div class="invalid-feedback" *ngIf="
           animalForm.get('animalStatus')?.touched &&
@@ -219,8 +204,12 @@
           
         </div>
         <div class="col-12 mt-3">
-          <button class="btn btn-primary m-2" type="submit">Submit</button>
-          <button class="btn btn-danger" type="submit" (click)="oncancel()">Cancel</button>
+          <button class="btn btn-success m-2" type="submit">
+            <i class="bi bi-check-circle"></i> Submit
+          </button>
+          <button class="btn btn-outline-secondary" type="button" (click)="oncancel()">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
         </div>
       </div>
     </form>
@@ -228,16 +217,15 @@
   <div *ngIf="!isvisible">
     <h4>Animals List</h4>
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-primary" type="button" (click)="onAdd()">Add Animal</button>
+      <button class="btn btn-primary" type="button" (click)="onAdd()">
+        <i class="bi bi-plus-circle"></i> Add Animal
+      </button>
     </div>
-
-
-    <!-- *ngIf="AnimalsData.length > 0" -->
     <table class="table table-bordered mt-3">
       <thead class="table-white">
         <tr>
           <th>Name</th>
-          <th>batchid</th>
+          <th>Batch ID</th>
           <th>Type</th>
           <th>Gender</th>
           <th>Health</th>
@@ -246,28 +234,30 @@
           <th>Status</th>
           <th>Purchase Date</th>
           <th class="text-center">Action</th>
-
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let animal of AnimalsData">
-          <td>{{ animal.animalName }}</td>
-          <td>{{ animal.batchId }}</td>
-          <td>{{ animal.animalType }}</td>
-          <td>{{ animal.gender }}</td>
-          <td>{{ animal.healthStatus }}</td>
-          <td>{{ animal.animalCost }}</td>
-          <td>{{ animal.venderName }}</td>
-          <td>{{ animal.animalStatus }}</td>
-          <td>{{ animal.purchaseDate | date: 'yyyy-MM-dd' }}</td>
-          
-
-          <td><button class="btn btn-primary me-4" (click)="onEdits(animal)">Edit</button>
-           <button class="btn btn-danger" type="button" (click)="onDelete(animal)">Delete</button>
+          <td>{{ animal.AnimalName }}</td>
+          <td>{{ animal.BatchID }}</td>
+          <td>{{ getAnimalTypeName(animal.AnimalTypeID) }}</td>
+          <td>{{ getGenderName(animal.GenderID) }}</td>
+          <td>{{ getHealthStatusName(animal.HealthStatusID) }}</td>
+          <td>{{ animal.AnimalCost }}</td>
+          <td>{{ getVendorName(animal.VendorID) }}</td>
+          <td>{{ getAnimalStatusName(animal.AnimalStatusID) }}</td>
+          <td>{{ animal.AnimalPurchasedDate | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="onEdits(animal)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(animal)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
           </td>
         </tr>
         <tr *ngIf="AnimalsData.length==0">
-          <td colspan="11" class="text-danger text-center ">No records found</td>
+          <td colspan="11" class="text-danger text-center">No records found</td>
         </tr>
       </tbody>
     </table>
