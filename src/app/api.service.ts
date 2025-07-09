@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -15,6 +16,28 @@ export class ApiService {
   private baseUrl = 'https://localhost:44394';  // ✅ Your actual API root (no /api or /Help)
 
   constructor(private http: HttpClient) {}
+
+
+  // 🐾 ADD ANIMAL - Add a new animal record
+  addAnimal(animalData: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/api/animals`,
+      animalData,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      }
+    ).pipe(
+      tap(res => console.log('✅ Animal added:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
 
   // 📨 CONTACT US - Submit contact form
   submitContact(formData: { name: string; phoneNumber: string; email: string; message: string }): Observable<any> {

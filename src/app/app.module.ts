@@ -9,6 +9,7 @@ import { SignUpComponent } from './Layout/sign-up/sign-up.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
+import { AnimalsComponent } from './Dashboard/dashboard/animals/animals.component';
 import { HeaderComponent } from './main-layout/header/header.component';
 import { FooterComponent } from './main-layout/footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -36,6 +37,7 @@ import{ApiService} from './api.service'
     ContactComponent,
     ResetPasswordComponent,
     OnlyNumberDirective,
+    AnimalsComponent,
     
     
     
