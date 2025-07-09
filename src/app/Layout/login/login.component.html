@@ -27,10 +27,10 @@
                 </div>
                 <div class="text-danger" *ngIf="f['password'].touched && f['password.errors']">
                  <small *ngIf="f['password']?.errors?.['required']">Password is required.</small>
-<small *ngIf="f['password']?.errors?.['minlength']">Use at least 12 characters.</small>
-                  <small *ngIf="f['password']?.errors?.['pattern']">
-  Must include uppercase, lowercase, number & symbol
-</small>
+                 <small *ngIf="f['password']?.errors?.['minlength']">Use at least 12 characters.</small>
+                 <small *ngIf="f['password']?.errors?.['pattern']">
+                    Must include uppercase, lowercase, number & symbol
+                  </small>
                 </div>
               </div>
 

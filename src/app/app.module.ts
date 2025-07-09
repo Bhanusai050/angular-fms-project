@@ -17,7 +17,15 @@ import { ContactComponent } from './homepage/contact/contact.component';
 import { ResetPasswordComponent } from './Layout/reset-password/reset-password.component'; // ✅ Import this
 import { RouterModule } from '@angular/router';
 import { OnlyNumberDirective } from './only-number.directive';
-import{ApiService} from './api.service'
+import{ApiService} from './api.service';
+import { SettingsComponent } from './Dashboard/dashboard/settings/settings.component'
+import { FeedInventoryComponent } from './Dashboard/dashboard/feed-inventory/feed-inventory.component';
+import { CustomersComponent } from './Dashboard/dashboard/customers/customers.component';
+import { VendorComponent } from './Dashboard/vendor/vendor.component';
+import { OrdersComponent } from './Dashboard/dashboard/orders/orders.component';
+import { InvestmentComponent } from './Dashboard/dashboard/investments/investments.component';
+import { ProductionComponent } from './Dashboard/production/production.component';
+import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.component';
 
 
 
@@ -38,9 +46,14 @@ import{ApiService} from './api.service'
     ResetPasswordComponent,
     OnlyNumberDirective,
     AnimalsComponent,
-    
-    
-    
+    CustomersComponent,
+    VendorComponent,
+    OrdersComponent,
+    InvestmentComponent,
+    ProductionComponent,
+    ExpensesComponent,
+    SettingsComponent,
+    FeedInventoryComponent
     
   ],
   imports: [

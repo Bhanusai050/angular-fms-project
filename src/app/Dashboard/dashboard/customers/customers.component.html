@@ -8,47 +8,47 @@
         <div class="col-md-4">
           <label for="customerId" class="form-label">Customer ID</label>
           <input type="text" class="form-control" id="customerId" formControlName="customerId"
-            [ngClass]="{ 'is-invalid': customerForm.get('customerId')?.invalid && customerForm.get('customerId')?.touched }" />
-          <div *ngIf="customerForm.get('customerId')?.touched && customerForm.get('customerId')?.invalid" class="text-danger">
-            <small>Customer ID is required.</small>
+            [class.is-invalid]="customerForm.get('customerId')?.touched && customerForm.get('customerId')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('customerId')?.touched && customerForm.get('customerId')?.invalid">
+            Customer ID is required.
           </div>
         </div>
 
         <div class="col-md-4">
           <label for="name" class="form-label">Customer Name</label>
           <input type="text" class="form-control" id="name" formControlName="name"
-            [ngClass]="{ 'is-invalid': customerForm.get('name')?.invalid && customerForm.get('name')?.touched }" />
-          <div *ngIf="customerForm.get('name')?.touched && customerForm.get('name')?.invalid" class="text-danger">
-            <small>Customer name is required.</small>
+            [class.is-invalid]="customerForm.get('name')?.touched && customerForm.get('name')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('name')?.touched && customerForm.get('name')?.invalid">
+            Customer name is required.
           </div>
         </div>
 
         <div class="col-md-4">
           <label for="phone" class="form-label">Phone Number</label>
           <input type="text" class="form-control" id="phone" formControlName="phone"
-            [ngClass]="{ 'is-invalid': customerForm.get('phone')?.invalid && customerForm.get('phone')?.touched }" />
-          <div *ngIf="customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid" class="text-danger">
-            <small *ngIf="customerForm.get('phone')?.errors?.['required']">Phone is required.</small>
-            <small *ngIf="customerForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number.</small>
+            [class.is-invalid]="customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid">
+            <span *ngIf="customerForm.get('phone')?.errors?.['required']">Phone is required.</span>
+            <span *ngIf="customerForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number.</span>
           </div>
         </div>
 
         <div class="col-md-4">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" formControlName="email"
-            [ngClass]="{ 'is-invalid': customerForm.get('email')?.invalid && customerForm.get('email')?.touched }" />
-          <div *ngIf="customerForm.get('email')?.touched && customerForm.get('email')?.invalid" class="text-danger">
-            <small *ngIf="customerForm.get('email')?.errors?.['required']">Email is required.</small>
-            <small *ngIf="customerForm.get('email')?.errors?.['email']">Invalid email format.</small>
+            [class.is-invalid]="customerForm.get('email')?.touched && customerForm.get('email')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('email')?.touched && customerForm.get('email')?.invalid">
+            <span *ngIf="customerForm.get('email')?.errors?.['required']">Email is required.</span>
+            <span *ngIf="customerForm.get('email')?.errors?.['email']">Invalid email format.</span>
           </div>
         </div>
 
         <div class="col-md-8">
           <label for="address" class="form-label">Address</label>
           <textarea class="form-control" id="address" rows="2" formControlName="address"
-            [ngClass]="{ 'is-invalid': customerForm.get('address')?.invalid && customerForm.get('address')?.touched }"></textarea>
-          <div *ngIf="customerForm.get('address')?.touched && customerForm.get('address')?.invalid" class="text-danger">
-            <small>Address is required.</small>
+            [class.is-invalid]="customerForm.get('address')?.touched && customerForm.get('address')?.invalid"></textarea>
+          <div class="invalid-feedback" *ngIf="customerForm.get('address')?.touched && customerForm.get('address')?.invalid">
+            Address is required.
           </div>
         </div>
 

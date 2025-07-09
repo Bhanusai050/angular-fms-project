@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../../api.service';
 
 @Component({
   selector: 'app-customers',
@@ -8,9 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CustomersComponent implements OnInit {
   customerForm!: FormGroup;
   isvisible = false;
+  isEditing: boolean = false;
+  editIndex: number = -1;
   customerData: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, @Inject(ApiService) private api: ApiService) {}
 
   ngOnInit(): void {
     this.customerForm = this.fb.group({
@@ -28,26 +31,50 @@ export class CustomersComponent implements OnInit {
       return;
     }
 
-    this.customerData.push(this.customerForm.value);
-    this.customerForm.reset();
-    this.isvisible = false;
+    if (this.isEditing && this.editIndex > -1) {
+      this.customerData[this.editIndex] = this.customerForm.value;
+    } else {
+      this.api.addCustomer(this.customerForm.value).subscribe({
+        next: (res: any) => {
+          alert('Customer added successfully!');
+          this.customerData.push(res);
+          this.customerForm.reset();
+          this.isvisible = false;
+        },
+        error: (err: any) => {
+          alert('Failed to add customer');
+          console.error('API Error:', err);
+        }
+      });
+    }
+    this.isEditing = false;
+    this.editIndex = -1;
   }
 
   onAdd(): void {
     this.isvisible = true;
+    this.isEditing = false;
     this.customerForm.reset();
   }
 
   oncancel(): void {
     this.isvisible = false;
+    this.isEditing = false;
+    this.editIndex = -1;
   }
 
   onEdit(customer: any): void {
+    const index = this.customerData.indexOf(customer);
+    this.editIndex = index;
     this.customerForm.patchValue(customer);
     this.isvisible = true;
+    this.isEditing = true;
   }
 
   onDelete(customer: any): void {
-    this.customerData = this.customerData.filter(c => c !== customer);
+    const index = this.customerData.indexOf(customer);
+    if (index > -1) {
+      this.customerData.splice(index, 1);
+    }
   }
 }

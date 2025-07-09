@@ -9,6 +9,15 @@ import { Component,output,EventEmitter } from '@angular/core';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ContactComponent } from './homepage/contact/contact.component';
 import { ResetPasswordComponent } from './Layout/reset-password/reset-password.component';
+import { AnimalsComponent } from './Dashboard/dashboard/animals/animals.component';
+import { VendorComponent } from './Dashboard/vendor/vendor.component';
+import { FeedInventoryComponent } from './Dashboard/dashboard/feed-inventory/feed-inventory.component';
+import { OrdersComponent } from './Dashboard/dashboard/orders/orders.component';
+import { InvestmentComponent } from './Dashboard/dashboard/investments/investments.component';
+import { ProductionComponent } from './Dashboard/production/production.component';
+import { CustomersComponent } from './Dashboard/dashboard/customers/customers.component';
+import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.component';
+import { SettingsComponent } from './Dashboard/dashboard/settings/settings.component';
 
 
 
@@ -21,9 +30,28 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
   {path:'contact', component:ContactComponent},
-  {path:'reset-password',component:ResetPasswordComponent}
+  {path:'reset-password',component:ResetPasswordComponent},
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'animals', pathMatch: 'full' }, // default dashboard page
+      { path: 'animals', component: AnimalsComponent },
+      { path: 'vendor', component: VendorComponent },
+      { path: 'feed-inventory', component: FeedInventoryComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'customers', component: CustomersComponent },
+      { path: 'expenses', component: ExpensesComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'investment', component: InvestmentComponent },
+      { path: 'production', component: ProductionComponent },
+    ]
+  },
 
+  // fallback route if no match
+  { path: '**', redirectTo: 'login' }
 ];
+  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
