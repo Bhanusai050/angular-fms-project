@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'', component:HomepageComponent},
   { path: 'forgot', component:ForgetpasswordComponent },
   {path: 'SignUp', component:SignUpComponent},
-  {path: 'Dashboard', component:DashboardComponent},
+  { path: 'Dashboard', loadChildren: () => import('./Dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
   {path: 'header', component:HeaderComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},

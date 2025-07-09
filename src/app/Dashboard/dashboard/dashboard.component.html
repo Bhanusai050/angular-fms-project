@@ -1,1 +1,17 @@
-<p>dashboard works!</p>
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <ul>
+      <li><a routerLink="animals" routerLinkActive="active">Animals</a></li>
+      <li><a routerLink="customers" routerLinkActive="active">Customers</a></li>
+      <li><a routerLink="expenses" routerLinkActive="active">Expenses</a></li>
+      <li><a routerLink="feed-inventory" routerLinkActive="active">Feed Inventory</a></li>
+      <li><a routerLink="investments" routerLinkActive="active">Investments</a></li>
+      <li><a routerLink="orders" routerLinkActive="active">Orders</a></li>
+      <li><a routerLink="production" routerLinkActive="active">Production</a></li>
+      <li><a routerLink="vendor" routerLinkActive="active">Vendor</a></li>
+    </ul>
+  </aside>
+  <main class="dashboard-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
