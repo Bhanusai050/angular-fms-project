@@ -8,21 +8,11 @@ import { ApiService } from '../../../api.service';
 })
 export class CustomersComponent implements OnInit {
   customerForm!: FormGroup;
-  isvisible = false;
-<<<<<<< HEAD
-  isEditing: boolean = false;
-  editIndex: number = -1;
-=======
-  isEditing = false;
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
-  customerData: any[] = [];
-  editIndex: number = -1;
-
-<<<<<<< HEAD
-  constructor(private fb: FormBuilder, @Inject(ApiService) private api: ApiService) {}
-=======
-  constructor(private fb: FormBuilder, private api: ApiService) {}
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
+isvisible = false;
+isEditing: boolean = false;
+editIndex: number = -1;
+customerData: any[] = [];
+constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.customerForm = this.fb.group({
@@ -58,20 +48,6 @@ export class CustomersComponent implements OnInit {
       this.customerForm.markAllAsTouched();
       return;
     }
-<<<<<<< HEAD
-
-    if (this.isEditing && this.editIndex > -1) {
-      this.customerData[this.editIndex] = this.customerForm.value;
-    } else {
-      this.api.addCustomer(this.customerForm.value).subscribe({
-        next: (res: any) => {
-          alert('Customer added successfully!');
-          this.customerData.push(res);
-          this.customerForm.reset();
-          this.isvisible = false;
-        },
-        error: (err: any) => {
-=======
     const formValue = this.customerForm.value;
     // Map frontend fields to backend property names
     const customerPayload = {
@@ -112,26 +88,17 @@ export class CustomersComponent implements OnInit {
           this.editIndex = -1;
         },
         error: (err) => {
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
           alert('Failed to add customer');
           console.error('API Error:', err);
         }
       });
     }
-<<<<<<< HEAD
-    this.isEditing = false;
-    this.editIndex = -1;
-=======
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
   }
 
   onAdd(): void {
     this.isvisible = true;
     this.isEditing = false;
-<<<<<<< HEAD
-=======
     this.editIndex = -1;
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
     this.customerForm.reset();
   }
 
@@ -144,9 +111,6 @@ export class CustomersComponent implements OnInit {
   onEdit(customer: any): void {
     const index = this.customerData.indexOf(customer);
     this.editIndex = index;
-<<<<<<< HEAD
-    this.customerForm.patchValue(customer);
-=======
     // Patch only frontend fields
     this.customerForm.patchValue({
       customerId: customer.customerId,
@@ -155,17 +119,11 @@ export class CustomersComponent implements OnInit {
       email: customer.email,
       address: customer.address
     });
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
     this.isvisible = true;
     this.isEditing = true;
   }
 
   onDelete(customer: any): void {
-<<<<<<< HEAD
-    const index = this.customerData.indexOf(customer);
-    if (index > -1) {
-      this.customerData.splice(index, 1);
-=======
     const customerId = customer.CustomerID;
     if (customerId) {
       this.api.deleteCustomer(customerId).subscribe({
@@ -179,7 +137,6 @@ export class CustomersComponent implements OnInit {
       });
     } else {
       alert('Customer ID not found for delete.');
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
     }
   }
 }

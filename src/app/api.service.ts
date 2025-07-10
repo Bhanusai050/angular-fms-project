@@ -14,31 +14,8 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class ApiService {
-<<<<<<< HEAD
-  // 🧑‍💼 ADD CUSTOMER - Add a new customer record
-  addCustomer(customerData: any): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/api/customers`,
-      customerData,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      }
-    ).pipe(
-      tap(res => console.log('✅ Customer added:', res)),
-      catchError(err => {
-        const msg = err.status === 0
-          ? 'Network error – unable to reach the server.'
-          : err.status >= 400 && err.status < 500
-            ? 'Invalid input – please check your data.'
-            : 'Server error – please try again later.';
-        return throwError(() => new Error(msg));
-      })
-    );
-  }
-  private baseUrl = 'https://localhost:44394';  // ✅ Your actual API root (no /api or /Help)
-=======
+  // ✅ ADD CUSTOMER - POST: /api/customers/add
   private baseUrl = 'https://localhost:44394'; // Your backend URL
->>>>>>> 5e18435fb8103f6cceab3c734049149295055aef
 
   constructor(private http: HttpClient) {}
 

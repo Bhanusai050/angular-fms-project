@@ -17,7 +17,6 @@ import { InvestmentComponent } from './Dashboard/dashboard/investments/investmen
 import { ProductionComponent } from './Dashboard/production/production.component';
 import { CustomersComponent } from './Dashboard/dashboard/customers/customers.component';
 import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.component';
-import { SettingsComponent } from './Dashboard/dashboard/settings/settings.component';
 
 
 
@@ -42,9 +41,10 @@ const routes: Routes = [
       { path: 'orders', component: OrdersComponent },
       { path: 'customers', component: CustomersComponent },
       { path: 'expenses', component: ExpensesComponent },
-      { path: 'settings', component: SettingsComponent },
+      // { path: 'settings', component: settingsComponent },
       { path: 'investment', component: InvestmentComponent },
       { path: 'production', component: ProductionComponent },
+      
     ]
   },
 
