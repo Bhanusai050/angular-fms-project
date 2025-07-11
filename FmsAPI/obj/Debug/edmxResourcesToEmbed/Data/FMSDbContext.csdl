@@ -1,0 +1,772 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FarmManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Animals" EntityType="FarmManagementSystemModel.Animal" />
+    <EntitySet Name="Assets" EntityType="FarmManagementSystemModel.Asset" />
+    <EntitySet Name="Companies" EntityType="FarmManagementSystemModel.Company" />
+    <EntitySet Name="Customers" EntityType="FarmManagementSystemModel.Customer" />
+    <EntitySet Name="Expenses" EntityType="FarmManagementSystemModel.Expens" />
+    <EntitySet Name="Feed_Consumption" EntityType="FarmManagementSystemModel.Feed_Consumption" />
+    <EntitySet Name="Feed_Inventory" EntityType="FarmManagementSystemModel.Feed_Inventory" />
+    <EntitySet Name="FeedPurchases" EntityType="FarmManagementSystemModel.FeedPurchas" />
+    <EntitySet Name="IdLookups" EntityType="FarmManagementSystemModel.IdLookup" />
+    <EntitySet Name="IdLookupValues" EntityType="FarmManagementSystemModel.IdLookupValue" />
+    <EntitySet Name="Investments" EntityType="FarmManagementSystemModel.Investment" />
+    <EntitySet Name="LandPurchases" EntityType="FarmManagementSystemModel.LandPurchas" />
+    <EntitySet Name="Orders" EntityType="FarmManagementSystemModel.Order" />
+    <EntitySet Name="PasswordResetTokens" EntityType="FarmManagementSystemModel.PasswordResetToken" />
+    <EntitySet Name="Permissions" EntityType="FarmManagementSystemModel.Permission" />
+    <EntitySet Name="Productions" EntityType="FarmManagementSystemModel.Production" />
+    <EntitySet Name="RolePermissions" EntityType="FarmManagementSystemModel.RolePermission" />
+    <EntitySet Name="Roles" EntityType="FarmManagementSystemModel.Role" />
+    <EntitySet Name="Salaries" EntityType="FarmManagementSystemModel.Salary" />
+    <EntitySet Name="sysdiagrams" EntityType="FarmManagementSystemModel.sysdiagram" />
+    <EntitySet Name="UserRoles" EntityType="FarmManagementSystemModel.UserRole" />
+    <EntitySet Name="Users" EntityType="FarmManagementSystemModel.User" />
+    <EntitySet Name="Vendors" EntityType="FarmManagementSystemModel.Vendor" />
+    <EntitySet Name="Workers" EntityType="FarmManagementSystemModel.Worker" />
+    <AssociationSet Name="FK__Animals__AnimalS__42E1EEFE" Association="FarmManagementSystemModel.FK__Animals__AnimalS__42E1EEFE">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__AnimalT__3F115E1A" Association="FarmManagementSystemModel.FK__Animals__AnimalT__3F115E1A">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__GenderI__40058253" Association="FarmManagementSystemModel.FK__Animals__GenderI__40058253">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__HealthS__40F9A68C" Association="FarmManagementSystemModel.FK__Animals__HealthS__40F9A68C">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__VendorI__41EDCAC5" Association="FarmManagementSystemModel.FK__Animals__VendorI__41EDCAC5">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Expenses__Linked__540C7B00" Association="FarmManagementSystemModel.FK__Expenses__Linked__540C7B00">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Cons__Anima__4C6B5938" Association="FarmManagementSystemModel.FK__Feed_Cons__Anima__4C6B5938">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productio__Anima__503BEA1C" Association="FarmManagementSystemModel.FK__Productio__Anima__503BEA1C">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Production" EntitySet="Productions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Assets__VendorID__3C34F16F" Association="FarmManagementSystemModel.FK__Assets__VendorID__3C34F16F">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__59C55456" Association="FarmManagementSystemModel.FK__Orders__Customer__59C55456">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Expenses__Linked__531856C7" Association="FarmManagementSystemModel.FK__Expenses__Linked__531856C7">
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Cons__FeedI__4D5F7D71" Association="FarmManagementSystemModel.FK__Feed_Cons__FeedI__4D5F7D71">
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+      <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Inve__FeedT__45BE5BA9" Association="FarmManagementSystemModel.FK__Feed_Inve__FeedT__45BE5BA9">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FeedPurch__FeedT__498EEC8D" Association="FarmManagementSystemModel.FK__FeedPurch__FeedT__498EEC8D">
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+      <End Role="FeedPurchas" EntitySet="FeedPurchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FeedPurch__Vendo__489AC854" Association="FarmManagementSystemModel.FK__FeedPurch__Vendo__489AC854">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="FeedPurchas" EntitySet="FeedPurchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IdLookupV__IdLoo__19DFD96B" Association="FarmManagementSystemModel.FK__IdLookupV__IdLoo__19DFD96B">
+      <End Role="IdLookup" EntitySet="IdLookups" />
+      <End Role="IdLookupValue" EntitySet="IdLookupValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Producti__5AB9788F" Association="FarmManagementSystemModel.FK__Orders__Producti__5AB9788F">
+      <End Role="Production" EntitySet="Productions" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__Permi__30C33EC3" Association="FarmManagementSystemModel.FK__RolePermi__Permi__30C33EC3">
+      <End Role="Permission" EntitySet="Permissions" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__RoleI__2FCF1A8A" Association="FarmManagementSystemModel.FK__RolePermi__RoleI__2FCF1A8A">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__RoleI__2BFE89A6" Association="FarmManagementSystemModel.FK__UserRoles__RoleI__2BFE89A6">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Salaries__Worker__5F7E2DAC" Association="FarmManagementSystemModel.FK__Salaries__Worker__5F7E2DAC">
+      <End Role="Worker" EntitySet="Workers" />
+      <End Role="Salary" EntitySet="Salaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__2B0A656D" Association="FarmManagementSystemModel.FK__UserRoles__UserI__2B0A656D">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="AnimalBatches" EntityType="FarmManagementSystemModel.AnimalBatch" />
+    <AssociationSet Name="FK_Animals_BatchID" Association="FarmManagementSystemModel.FK_Animals_BatchID">
+      <End Role="AnimalBatch" EntitySet="AnimalBatches" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <FunctionImport Name="AddAnimalToBatch">
+      <Parameter Name="BatchID" Mode="In" Type="Int32" />
+      <Parameter Name="AnimalName" Mode="In" Type="String" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="AnimalTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="GenderID" Mode="In" Type="Int32" />
+      <Parameter Name="HealthStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="AnimalCost" Mode="In" Type="Decimal" />
+      <Parameter Name="VendorID" Mode="In" Type="Int32" />
+      <Parameter Name="AnimalStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="AnimalPurchasedDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AddCustomerOrder">
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PaymentStatus" Mode="In" Type="String" />
+      <Parameter Name="OrderStatus" Mode="In" Type="String" />
+      <Parameter Name="ProductionID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="AddExpense">
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="LinkedFeedID" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedAnimalID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddFeedConsumption">
+      <Parameter Name="AnimalID" Mode="In" Type="Int32" />
+      <Parameter Name="FeedID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AddFeedPurchase">
+      <Parameter Name="VendorID" Mode="In" Type="Int32" />
+      <Parameter Name="FeedTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+      <Parameter Name="Cost" Mode="In" Type="Decimal" />
+      <Parameter Name="PurchaseDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AddProduction">
+      <Parameter Name="Date" Mode="In" Type="DateTime" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+      <Parameter Name="AnimalID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddSalary">
+      <Parameter Name="WorkerID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAnimalsByBatch" ReturnType="Collection(FarmManagementSystemModel.GetAnimalsByBatch_Result)">
+      <Parameter Name="BatchID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FarmManagementSystemModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FarmManagementSystemModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="ContactMessages" EntityType="FarmManagementSystemModel.ContactMessage" />
+  </EntityContainer>
+  <EntityType Name="Animal">
+    <Key>
+      <PropertyRef Name="AnimalID" />
+    </Key>
+    <Property Name="AnimalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AnimalTypeID" Type="Int32" />
+    <Property Name="AnimalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="GenderID" Type="Int32" />
+    <Property Name="HealthStatusID" Type="Int32" />
+    <Property Name="AnimalCost" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="VendorID" Type="Int32" />
+    <Property Name="AnimalStatusID" Type="Int32" />
+    <Property Name="AnimalPurchasedDate" Type="DateTime" Precision="0" />
+    <Property Name="BatchID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="Cost" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="VendorID" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Expens">
+    <Key>
+      <PropertyRef Name="ExpenseID" />
+    </Key>
+    <Property Name="ExpenseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="LinkedFeedID" Type="Int32" />
+    <Property Name="LinkedAnimalID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Feed_Consumption">
+    <Key>
+      <PropertyRef Name="ConsumptionID" />
+    </Key>
+    <Property Name="ConsumptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AnimalID" Type="Int32" />
+    <Property Name="FeedID" Type="Int32" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Feed_Inventory">
+    <Key>
+      <PropertyRef Name="FeedID" />
+    </Key>
+    <Property Name="FeedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FeedTypeID" Type="Int32" />
+    <Property Name="StockQuantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="FeedPurchas">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorID" Type="Int32" />
+    <Property Name="FeedTypeID" Type="Int32" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Cost" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="IdLookup">
+    <Key>
+      <PropertyRef Name="IdLookupID" />
+    </Key>
+    <Property Name="IdLookupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LookupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IdLookupValue">
+    <Key>
+      <PropertyRef Name="IdValueID" />
+    </Key>
+    <Property Name="IdValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLookupID" Type="Int32" />
+    <Property Name="ValueName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Investment">
+    <Key>
+      <PropertyRef Name="InvestmentID" />
+    </Key>
+    <Property Name="InvestmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CapitalAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LandPurchas">
+    <Key>
+      <PropertyRef Name="LandID" />
+    </Key>
+    <Property Name="LandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Cost" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Purpose" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="0" />
+    <Property Name="PaymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductionID" Type="Int32" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="21" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="PasswordResetToken">
+    <Key>
+      <PropertyRef Name="TokenID" />
+    </Key>
+    <Property Name="TokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OTP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ExpiryTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsUsed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Production">
+    <Key>
+      <PropertyRef Name="ProductionID" />
+    </Key>
+    <Property Name="ProductionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AnimalID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="RolePermissionID" />
+    </Key>
+    <Property Name="RolePermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="PermissionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="SalaryID" />
+    </Key>
+    <Property Name="SalaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkerID" Type="Int32" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+    <Property Name="Amount" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="RoleID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorID" />
+    </Key>
+    <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="WorkerID" />
+    </Key>
+    <Property Name="WorkerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HireDate" Type="DateTime" Precision="0" />
+    <Property Name="ContactInfo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Animals__AnimalS__42E1EEFE">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="AnimalStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__AnimalT__3F115E1A">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="AnimalTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__GenderI__40058253">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__HealthS__40F9A68C">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="HealthStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__VendorI__41EDCAC5">
+    <End Type="FarmManagementSystemModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Expenses__Linked__540C7B00">
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Expens" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="LinkedAnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Cons__Anima__4C6B5938">
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Feed_Consumption" Role="Feed_Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Feed_Consumption">
+        <PropertyRef Name="AnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productio__Anima__503BEA1C">
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Production" Role="Production" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Production">
+        <PropertyRef Name="AnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Assets__VendorID__3C34F16F">
+    <End Type="FarmManagementSystemModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Asset" Role="Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__59C55456">
+    <End Type="FarmManagementSystemModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Expenses__Linked__531856C7">
+    <End Type="FarmManagementSystemModel.Feed_Inventory" Role="Feed_Inventory" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Expens" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feed_Inventory">
+        <PropertyRef Name="FeedID" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="LinkedFeedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Cons__FeedI__4D5F7D71">
+    <End Type="FarmManagementSystemModel.Feed_Inventory" Role="Feed_Inventory" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Feed_Consumption" Role="Feed_Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feed_Inventory">
+        <PropertyRef Name="FeedID" />
+      </Principal>
+      <Dependent Role="Feed_Consumption">
+        <PropertyRef Name="FeedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Inve__FeedT__45BE5BA9">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Feed_Inventory" Role="Feed_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Feed_Inventory">
+        <PropertyRef Name="FeedTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FeedPurch__FeedT__498EEC8D">
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.FeedPurchas" Role="FeedPurchas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValue">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="FeedPurchas">
+        <PropertyRef Name="FeedTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FeedPurch__Vendo__489AC854">
+    <End Type="FarmManagementSystemModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.FeedPurchas" Role="FeedPurchas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="FeedPurchas">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IdLookupV__IdLoo__19DFD96B">
+    <End Type="FarmManagementSystemModel.IdLookup" Role="IdLookup" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.IdLookupValue" Role="IdLookupValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookup">
+        <PropertyRef Name="IdLookupID" />
+      </Principal>
+      <Dependent Role="IdLookupValue">
+        <PropertyRef Name="IdLookupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Producti__5AB9788F">
+    <End Type="FarmManagementSystemModel.Production" Role="Production" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Production">
+        <PropertyRef Name="ProductionID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ProductionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__Permi__30C33EC3">
+    <End Type="FarmManagementSystemModel.Permission" Role="Permission" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.RolePermission" Role="RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__RoleI__2FCF1A8A">
+    <End Type="FarmManagementSystemModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.RolePermission" Role="RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__RoleI__2BFE89A6">
+    <End Type="FarmManagementSystemModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Salaries__Worker__5F7E2DAC">
+    <End Type="FarmManagementSystemModel.Worker" Role="Worker" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Salary" Role="Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="WorkerID" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="WorkerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__2B0A656D">
+    <End Type="FarmManagementSystemModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AnimalBatch">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BatchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PurchasedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Purpose" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Animals_BatchID">
+    <End Type="FarmManagementSystemModel.AnimalBatch" Role="AnimalBatch" Multiplicity="0..1" />
+    <End Type="FarmManagementSystemModel.Animal" Role="Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnimalBatch">
+        <PropertyRef Name="BatchID" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetAnimalsByBatch_Result">
+    <Property Type="Int32" Name="AnimalID" Nullable="false" />
+    <Property Type="Int32" Name="AnimalTypeID" Nullable="true" />
+    <Property Type="String" Name="AnimalName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+    <Property Type="Int32" Name="GenderID" Nullable="true" />
+    <Property Type="Int32" Name="HealthStatusID" Nullable="true" />
+    <Property Type="Decimal" Name="AnimalCost" Nullable="true" Precision="12" Scale="2" />
+    <Property Type="Int32" Name="VendorID" Nullable="true" />
+    <Property Type="Int32" Name="AnimalStatusID" Nullable="true" />
+    <Property Type="DateTime" Name="AnimalPurchasedDate" Nullable="true" />
+    <Property Type="Int32" Name="BatchID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="ContactMessage">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SubmittedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

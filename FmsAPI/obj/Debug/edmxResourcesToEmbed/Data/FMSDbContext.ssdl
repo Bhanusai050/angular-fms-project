@@ -1,0 +1,749 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AnimalBatches">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BatchName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PurchasedDate" Type="date" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Animals">
+    <Key>
+      <PropertyRef Name="AnimalID" />
+    </Key>
+    <Property Name="AnimalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AnimalTypeID" Type="int" />
+    <Property Name="AnimalName" Type="varchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="date" />
+    <Property Name="GenderID" Type="int" />
+    <Property Name="HealthStatusID" Type="int" />
+    <Property Name="AnimalCost" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="VendorID" Type="int" />
+    <Property Name="AnimalStatusID" Type="int" />
+    <Property Name="AnimalPurchasedDate" Type="date" />
+    <Property Name="BatchID" Type="int" />
+  </EntityType>
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetName" Type="varchar" MaxLength="100" />
+    <Property Name="Category" Type="varchar" MaxLength="50" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="Cost" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="VendorID" Type="int" />
+    <Property Name="Notes" Type="text" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ContactMessages">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Message" Type="text" Nullable="false" />
+    <Property Name="SubmittedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Expenses">
+    <Key>
+      <PropertyRef Name="ExpenseID" />
+    </Key>
+    <Property Name="ExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Amount" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="LinkedFeedID" Type="int" />
+    <Property Name="LinkedAnimalID" Type="int" />
+  </EntityType>
+  <EntityType Name="Feed_Consumption">
+    <Key>
+      <PropertyRef Name="ConsumptionID" />
+    </Key>
+    <Property Name="ConsumptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AnimalID" Type="int" />
+    <Property Name="FeedID" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Feed_Inventory">
+    <Key>
+      <PropertyRef Name="FeedID" />
+    </Key>
+    <Property Name="FeedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FeedTypeID" Type="int" />
+    <Property Name="StockQuantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Unit" Type="varchar" MaxLength="20" />
+    <Property Name="ExpiryDate" Type="date" />
+  </EntityType>
+  <EntityType Name="FeedPurchases">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VendorID" Type="int" />
+    <Property Name="FeedTypeID" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Cost" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="PurchaseDate" Type="date" />
+  </EntityType>
+  <EntityType Name="IdLookup">
+    <Key>
+      <PropertyRef Name="IdLookupID" />
+    </Key>
+    <Property Name="IdLookupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LookupName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IdLookupValues">
+    <Key>
+      <PropertyRef Name="IdValueID" />
+    </Key>
+    <Property Name="IdValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdLookupID" Type="int" />
+    <Property Name="ValueName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Investments">
+    <Key>
+      <PropertyRef Name="InvestmentID" />
+    </Key>
+    <Property Name="InvestmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="CapitalAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Description" Type="text" />
+  </EntityType>
+  <EntityType Name="LandPurchases">
+    <Key>
+      <PropertyRef Name="LandID" />
+    </Key>
+    <Property Name="LandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurchaseDate" Type="date" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+    <Property Name="Size" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Cost" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Purpose" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="PaymentStatus" Type="varchar" MaxLength="50" />
+    <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+    <Property Name="ProductionID" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="TotalAmount" Type="decimal" Precision="21" Scale="4" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="PasswordResetTokens">
+    <Key>
+      <PropertyRef Name="TokenID" />
+    </Key>
+    <Property Name="TokenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="OTP" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ExpiryTime" Type="datetime" Nullable="false" />
+    <Property Name="IsUsed" Type="bit" />
+  </EntityType>
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="PermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Production">
+    <Key>
+      <PropertyRef Name="ProductionID" />
+    </Key>
+    <Property Name="ProductionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="AnimalID" Type="int" />
+  </EntityType>
+  <EntityType Name="RolePermissions">
+    <Key>
+      <PropertyRef Name="RolePermissionID" />
+    </Key>
+    <Property Name="RolePermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="PermissionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Salaries">
+    <Key>
+      <PropertyRef Name="SalaryID" />
+    </Key>
+    <Property Name="SalaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkerID" Type="int" />
+    <Property Name="PaymentDate" Type="date" />
+    <Property Name="Amount" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Notes" Type="text" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="RoleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Vendors">
+    <Key>
+      <PropertyRef Name="VendorID" />
+    </Key>
+    <Property Name="VendorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VendorName" Type="varchar" MaxLength="100" />
+    <Property Name="Category" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Workers">
+    <Key>
+      <PropertyRef Name="WorkerID" />
+    </Key>
+    <Property Name="WorkerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="HireDate" Type="date" />
+    <Property Name="ContactInfo" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Animals__AnimalS__42E1EEFE">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="AnimalStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__AnimalT__3F115E1A">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="AnimalTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__GenderI__40058253">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__HealthS__40F9A68C">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="HealthStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__VendorI__41EDCAC5">
+    <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Assets__VendorID__3C34F16F">
+    <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Expenses__Linked__531856C7">
+    <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="0..1" />
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feed_Inventory">
+        <PropertyRef Name="FeedID" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="LinkedFeedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Expenses__Linked__540C7B00">
+    <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animals">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="LinkedAnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Cons__Anima__4C6B5938">
+    <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+    <End Role="Feed_Consumption" Type="Self.Feed_Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animals">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Feed_Consumption">
+        <PropertyRef Name="AnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Cons__FeedI__4D5F7D71">
+    <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="0..1" />
+    <End Role="Feed_Consumption" Type="Self.Feed_Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feed_Inventory">
+        <PropertyRef Name="FeedID" />
+      </Principal>
+      <Dependent Role="Feed_Consumption">
+        <PropertyRef Name="FeedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feed_Inve__FeedT__45BE5BA9">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="Feed_Inventory">
+        <PropertyRef Name="FeedTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FeedPurch__FeedT__498EEC8D">
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
+    <End Role="FeedPurchases" Type="Self.FeedPurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookupValues">
+        <PropertyRef Name="IdValueID" />
+      </Principal>
+      <Dependent Role="FeedPurchases">
+        <PropertyRef Name="FeedTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FeedPurch__Vendo__489AC854">
+    <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
+    <End Role="FeedPurchases" Type="Self.FeedPurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="FeedPurchases">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IdLookupV__IdLoo__19DFD96B">
+    <End Role="IdLookup" Type="Self.IdLookup" Multiplicity="0..1" />
+    <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdLookup">
+        <PropertyRef Name="IdLookupID" />
+      </Principal>
+      <Dependent Role="IdLookupValues">
+        <PropertyRef Name="IdLookupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__59C55456">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Producti__5AB9788F">
+    <End Role="Production" Type="Self.Production" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Production">
+        <PropertyRef Name="ProductionID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productio__Anima__503BEA1C">
+    <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+    <End Role="Production" Type="Self.Production" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animals">
+        <PropertyRef Name="AnimalID" />
+      </Principal>
+      <Dependent Role="Production">
+        <PropertyRef Name="AnimalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__Permi__30C33EC3">
+    <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
+    <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="RolePermissions">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__RoleI__2FCF1A8A">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermissions">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Salaries__Worker__5F7E2DAC">
+    <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+    <End Role="Salaries" Type="Self.Salaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workers">
+        <PropertyRef Name="WorkerID" />
+      </Principal>
+      <Dependent Role="Salaries">
+        <PropertyRef Name="WorkerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__RoleI__2BFE89A6">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__2B0A656D">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Animals_BatchID">
+    <End Role="AnimalBatches" Type="Self.AnimalBatches" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnimalBatches">
+        <PropertyRef Name="BatchID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddAnimalToBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BatchID" Type="int" Mode="In" />
+    <Parameter Name="AnimalName" Type="varchar" Mode="In" />
+    <Parameter Name="BirthDate" Type="date" Mode="In" />
+    <Parameter Name="AnimalTypeID" Type="int" Mode="In" />
+    <Parameter Name="GenderID" Type="int" Mode="In" />
+    <Parameter Name="HealthStatusID" Type="int" Mode="In" />
+    <Parameter Name="AnimalCost" Type="decimal" Mode="In" />
+    <Parameter Name="VendorID" Type="int" Mode="In" />
+    <Parameter Name="AnimalStatusID" Type="int" Mode="In" />
+    <Parameter Name="AnimalPurchasedDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="AddCustomerOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="OrderDate" Type="date" Mode="In" />
+    <Parameter Name="PaymentStatus" Type="varchar" Mode="In" />
+    <Parameter Name="OrderStatus" Type="varchar" Mode="In" />
+    <Parameter Name="ProductionID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="decimal" Mode="In" />
+    <Parameter Name="UnitPrice" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="AddExpense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="LinkedFeedID" Type="int" Mode="In" />
+    <Parameter Name="LinkedAnimalID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddFeedConsumption" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AnimalID" Type="int" Mode="In" />
+    <Parameter Name="FeedID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="decimal" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="AddFeedPurchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VendorID" Type="int" Mode="In" />
+    <Parameter Name="FeedTypeID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="decimal" Mode="In" />
+    <Parameter Name="Cost" Type="decimal" Mode="In" />
+    <Parameter Name="PurchaseDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="AddProduction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+    <Parameter Name="Quantity" Type="decimal" Mode="In" />
+    <Parameter Name="AnimalID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddSalary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="WorkerID" Type="int" Mode="In" />
+    <Parameter Name="PaymentDate" Type="date" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="Notes" Type="text" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="GetAnimalsByBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BatchID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="FarmManagementSystemModelStoreContainer">
+    <EntitySet Name="AnimalBatches" EntityType="Self.AnimalBatches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactMessages" EntityType="Self.ContactMessages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feed_Consumption" EntityType="Self.Feed_Consumption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feed_Inventory" EntityType="Self.Feed_Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeedPurchases" EntityType="Self.FeedPurchases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IdLookup" EntityType="Self.IdLookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IdLookupValues" EntityType="Self.IdLookupValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Investments" EntityType="Self.Investments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LandPurchases" EntityType="Self.LandPurchases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PasswordResetTokens" EntityType="Self.PasswordResetTokens" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salaries" EntityType="Self.Salaries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Animals__AnimalS__42E1EEFE" Association="Self.FK__Animals__AnimalS__42E1EEFE">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__AnimalT__3F115E1A" Association="Self.FK__Animals__AnimalT__3F115E1A">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__GenderI__40058253" Association="Self.FK__Animals__GenderI__40058253">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__HealthS__40F9A68C" Association="Self.FK__Animals__HealthS__40F9A68C">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__VendorI__41EDCAC5" Association="Self.FK__Animals__VendorI__41EDCAC5">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Assets__VendorID__3C34F16F" Association="Self.FK__Assets__VendorID__3C34F16F">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Expenses__Linked__531856C7" Association="Self.FK__Expenses__Linked__531856C7">
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Expenses__Linked__540C7B00" Association="Self.FK__Expenses__Linked__540C7B00">
+      <End Role="Animals" EntitySet="Animals" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Cons__Anima__4C6B5938" Association="Self.FK__Feed_Cons__Anima__4C6B5938">
+      <End Role="Animals" EntitySet="Animals" />
+      <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Cons__FeedI__4D5F7D71" Association="Self.FK__Feed_Cons__FeedI__4D5F7D71">
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+      <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feed_Inve__FeedT__45BE5BA9" Association="Self.FK__Feed_Inve__FeedT__45BE5BA9">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FeedPurch__FeedT__498EEC8D" Association="Self.FK__FeedPurch__FeedT__498EEC8D">
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+      <End Role="FeedPurchases" EntitySet="FeedPurchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FeedPurch__Vendo__489AC854" Association="Self.FK__FeedPurch__Vendo__489AC854">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="FeedPurchases" EntitySet="FeedPurchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IdLookupV__IdLoo__19DFD96B" Association="Self.FK__IdLookupV__IdLoo__19DFD96B">
+      <End Role="IdLookup" EntitySet="IdLookup" />
+      <End Role="IdLookupValues" EntitySet="IdLookupValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__59C55456" Association="Self.FK__Orders__Customer__59C55456">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Producti__5AB9788F" Association="Self.FK__Orders__Producti__5AB9788F">
+      <End Role="Production" EntitySet="Production" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productio__Anima__503BEA1C" Association="Self.FK__Productio__Anima__503BEA1C">
+      <End Role="Animals" EntitySet="Animals" />
+      <End Role="Production" EntitySet="Production" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__Permi__30C33EC3" Association="Self.FK__RolePermi__Permi__30C33EC3">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="RolePermissions" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__RoleI__2FCF1A8A" Association="Self.FK__RolePermi__RoleI__2FCF1A8A">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolePermissions" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Salaries__Worker__5F7E2DAC" Association="Self.FK__Salaries__Worker__5F7E2DAC">
+      <End Role="Workers" EntitySet="Workers" />
+      <End Role="Salaries" EntitySet="Salaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__RoleI__2BFE89A6" Association="Self.FK__UserRoles__RoleI__2BFE89A6">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__2B0A656D" Association="Self.FK__UserRoles__UserI__2B0A656D">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Animals_BatchID" Association="Self.FK_Animals_BatchID">
+      <End Role="AnimalBatches" EntitySet="AnimalBatches" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
