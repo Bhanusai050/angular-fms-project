@@ -1,0 +1,112 @@
+<div class="container mt-4">
+  <div *ngIf="isvisible">
+    <h3 class="mb-4">Add Feed Inventory</h3>
+
+    <form [formGroup]="feedForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="row g-3">
+
+        <div class="col-md-4">
+          <label for="feedId" class="form-label">Feed ID</label>
+          <input type="text" class="form-control" id="feedId" formControlName="feedId"
+            [ngClass]="{ 'is-invalid': feedForm.get('feedId')?.invalid && feedForm.get('feedId')?.touched }" />
+          <div *ngIf="feedForm.get('feedId')?.touched && feedForm.get('feedId')?.invalid" class="text-danger">
+            <small>Feed ID is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="feedType" class="form-label">Feed Type</label>
+          <input type="text" class="form-control" id="feedType" formControlName="feedType"
+            [ngClass]="{ 'is-invalid': feedForm.get('feedType')?.invalid && feedForm.get('feedType')?.touched }" />
+          <div *ngIf="feedForm.get('feedType')?.touched && feedForm.get('feedType')?.invalid" class="text-danger">
+            <small>Feed Type is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="purchaseDate" class="form-label">Purchase Date</label>
+          <input type="date" class="form-control" id="purchaseDate" formControlName="purchaseDate"
+            [ngClass]="{ 'is-invalid': feedForm.get('purchaseDate')?.invalid && feedForm.get('purchaseDate')?.touched }" />
+          <div *ngIf="feedForm.get('purchaseDate')?.touched && feedForm.get('purchaseDate')?.invalid" class="text-danger">
+            <small>Purchase Date is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="vendor" class="form-label">Vendor</label>
+          <input type="text" class="form-control" id="vendor" formControlName="vendor"
+            [ngClass]="{ 'is-invalid': feedForm.get('vendor')?.invalid && feedForm.get('vendor')?.touched }" />
+          <div *ngIf="feedForm.get('vendor')?.touched && feedForm.get('vendor')?.invalid" class="text-danger">
+            <small>Vendor is required.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="quantity" class="form-label">Quantity (kg)</label>
+          <input type="number" class="form-control" id="quantity" formControlName="quantity"
+            [ngClass]="{ 'is-invalid': feedForm.get('quantity')?.invalid && feedForm.get('quantity')?.touched }" />
+          <div *ngIf="feedForm.get('quantity')?.touched && feedForm.get('quantity')?.invalid" class="text-danger">
+            <small *ngIf="feedForm.get('quantity')?.errors?.['required']">Quantity is required.</small>
+            <small *ngIf="feedForm.get('quantity')?.errors?.['min']">Minimum value must be 1.</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="pricePerKg" class="form-label">Price per Kg</label>
+          <input type="number" class="form-control" id="pricePerKg" formControlName="pricePerKg"
+            [ngClass]="{ 'is-invalid': feedForm.get('pricePerKg')?.invalid && feedForm.get('pricePerKg')?.touched }" />
+          <div *ngIf="feedForm.get('pricePerKg')?.touched && feedForm.get('pricePerKg')?.invalid" class="text-danger">
+            <small *ngIf="feedForm.get('pricePerKg')?.errors?.['required']">Price is required.</small>
+            <small *ngIf="feedForm.get('pricePerKg')?.errors?.['min']">Minimum price must be 0.</small>
+          </div>
+        </div>
+
+        <div class="col-12 mt-3">
+          <button class="btn btn-success" type="submit">Submit</button>
+          <button class="btn btn-danger" type="button" (click)="oncancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!isvisible">
+    <h4>Feed Inventory List</h4>
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" (click)="onAdd()">Add Feed</button>
+    </div>
+    <hr class="my-5" />
+
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Feed ID</th>
+          <th>Feed Type</th>
+          <th>Purchase Date</th>
+          <th>Vendor</th>
+          <th>Quantity (kg)</th>
+          <th>Price per Kg</th>
+          <th>Total Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feed of feedData">
+          <td>{{ feed.feedId }}</td>
+          <td>{{ feed.feedType }}</td>
+          <td>{{ feed.purchaseDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ feed.vendor }}</td>
+          <td>{{ feed.quantity }}</td>
+          <td>{{ feed.pricePerKg }}</td>
+          <td>{{ feed.quantity * feed.pricePerKg }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(feed)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(feed)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="feedData.length === 0">
+          <td colspan="8" class="text-center py-4 fw-bold">No Data Found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
