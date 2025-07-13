@@ -1,34 +1,39 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 bg-light">
-      <!-- Sidebar Menu -->
-      <ul class="nav flex-column mt-3">
-        <li class="nav-item">
-          <a routerLink="/dashboard/animals" routerLinkActive="active" class="nav-link">Animals</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/vendor" routerLinkActive="active" class="nav-link">Vendors</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/feed-inventory" routerLinkActive="active" class="nav-link">Feed Inventory</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/orders" routerLinkActive="active" class="nav-link">Orders</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/customers" routerLinkActive="active" class="nav-link">Customers</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/expenses" routerLinkActive="active" class="nav-link">Expenses</a> 
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard/settings" routerLinkActive="active" class="nav-link">settings</a>          
-      </ul>
-    </div>
-
-    <div class="col-md-10 mt-3">
-      <!-- Main content -->
-      <router-outlet></router-outlet>
+<!-- Dashboard Header -->
+<header class="dashboard-header">
+  <div class="header-content">
+    <span class="dashboard-title">Farm Management System</span>
+    <div class="user-info">
+      <span class="user-name">{{userName}}</span>
+      <button class="btn btn-primary" (click)="logout()">Logout</button>
     </div>
   </div>
+</header>
+
+<div class="dashboard-layout">
+  <nav class="sidebar">
+    <ul>
+      <li><a routerLink="/dashboard/animals" routerLinkActive="active">Animals</a></li>
+      <li><a routerLink="/dashboard/vendor" routerLinkActive="active">Vendors</a></li>
+      <li><a routerLink="/dashboard/feed-inventory" routerLinkActive="active">Feed Inventory</a></li>
+      <li><a routerLink="/dashboard/orders" routerLinkActive="active">Orders</a></li>
+      <li><a routerLink="/dashboard/customers" routerLinkActive="active">Customers</a></li>
+      <li><a routerLink="/dashboard/expenses" routerLinkActive="active">Expenses</a></li>
+      <li><a routerLink="/dashboard/settings" routerLinkActive="active">Settings</a></li>
+    </ul>
+  </nav>
+  <div class="dashboard-content">
+    <!-- Main content -->
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+<!-- Dashboard Footer -->
+<footer class="dashboard-footer">
+  <div class="footer-content">
+    <span class="footer-center">&copy; 2025 Farm Management System. All rights reserved.</span>
+    <span class="footer-links">
+      <a href="/dashboard/settings">Settings</a> |
+      <a href="/dashboard/help">Help</a>
+    </span>
+  </div>
+</footer>

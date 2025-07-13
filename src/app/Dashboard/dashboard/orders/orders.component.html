@@ -129,27 +129,26 @@
     <div class="d-flex justify-content-end mb-3">
       <button class="btn btn-success" type="button" (click)="onAdd()">Add Order</button>
     </div>
-    <hr class="my-5" />
 
-    <table class="table table-bordered table-striped mt-3 text-center">
-      <thead class="table-dark">
+    <table class="table table-bordered mt-3">
+      <thead class="table-white">
         <tr>
-          <th>Order </th>
+          <th>Order</th>
           <th>Customer Name</th>
           <th>Order Date</th>
           <th>Payment Status</th>
           <th>Order Status</th>
-          <th>Production </th>
+          <th>Production</th>
           <th>Quantity</th>
           <th>Unit Price</th>
           <th>Total Amount</th>
-          <th>Actions</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of ordersData">
           <td>{{ order.order }}</td>
-          <td>{{ order.customerName}}</td>
+          <td>{{ order.customerName }}</td>
           <td>{{ order.orderDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ order.paymentStatus }}</td>
           <td>{{ order.orderStatus }}</td>
@@ -157,16 +156,18 @@
           <td>{{ order.quantity }}</td>
           <td>{{ order.unitPrice }}</td>
           <td>{{ order.totalAmount }}</td>
-    <td>
-      <button class="btn btn-primary btn-sm me-2" (click)="onEdit(order)">Edit</button>
-      <button class="btn btn-danger btn-sm" (click)="onDelete(order)">Delete</button>
-    </td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="onEdit(order)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(order)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
         </tr>
         <tr *ngIf="ordersData.length === 0">
-    <td colspan="10" class="text-center py-4 fw-bold">
-      No Data Found
-    </td>
-  </tr>
+          <td colspan="10" class="text-danger text-center">No records found</td>
+        </tr>
       </tbody>
     </table>
   </div>

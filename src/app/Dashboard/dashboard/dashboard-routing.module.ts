@@ -9,20 +9,21 @@ import { InvestmentComponent } from './investments/investments.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductionComponent } from '../production/production.component';
 import { VendorComponent } from '../vendor/vendor.component';
+import { RbacGuard } from '../../rbac.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
-      { path: 'animals', component: AnimalsComponent },
-      { path: 'customers', component: CustomersComponent },
-      { path: 'expenses', component: ExpensesComponent },
-      { path: 'feed-inventory', component: FeedInventoryComponent },
-      { path: 'investments', component: InvestmentComponent },
-      { path: 'orders', component: OrdersComponent },
-      { path: 'production', component: ProductionComponent },
-      { path: 'vendor', component: VendorComponent },
+      { path: 'animals', component: AnimalsComponent, canActivate: [RbacGuard], data: { permission: 'ViewAnimals' } },
+      { path: 'customers', component: CustomersComponent, canActivate: [RbacGuard], data: { permission: 'ViewCustomers' } },
+      { path: 'expenses', component: ExpensesComponent, canActivate: [RbacGuard], data: { permission: 'ViewExpenses' } },
+      { path: 'feed-inventory', component: FeedInventoryComponent, canActivate: [RbacGuard], data: { permission: 'ViewFeedInventory' } },
+      { path: 'investments', component: InvestmentComponent, canActivate: [RbacGuard], data: { permission: 'ViewInvestments' } },
+      { path: 'orders', component: OrdersComponent, canActivate: [RbacGuard], data: { permission: 'ViewOrders' } },
+      { path: 'production', component: ProductionComponent, canActivate: [RbacGuard], data: { permission: 'ViewProduction' } },
+      { path: 'vendor', component: VendorComponent, canActivate: [RbacGuard], data: { permission: 'ViewVendor' } },
     ]
   }
 ];

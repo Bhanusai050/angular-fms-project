@@ -12,6 +12,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductionComponent } from '../production/production.component';
 import { VendorComponent } from '../vendor/vendor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { RbacGuard } from '../../rbac.guard';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    AuthService,
+    RbacGuard
   ]
 })
 export class DashboardModule {}

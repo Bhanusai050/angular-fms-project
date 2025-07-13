@@ -7,6 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 export interface LoginResponse {
   token: string;
+  username?: string; // Add username property for login response
   // Extend if your API response contains more fields
 }
 

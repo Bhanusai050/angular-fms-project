@@ -86,10 +86,9 @@
     <div class="d-flex justify-content-end mb-3">
       <button class="btn btn-success" (click)="onAdd()">Add Expense</button>
     </div>
-    <hr class="my-5" />
 
-    <table class="table table-bordered table-striped text-center">
-      <thead class="table-dark">
+    <table class="table table-bordered mt-3">
+      <thead class="table-white">
         <tr>
           <th>ID</th>
           <th>Category</th>
@@ -97,7 +96,7 @@
           <th>Amount</th>
           <th>Date</th>
           <th>Payment Mode</th>
-          <th>Actions</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -109,12 +108,16 @@
           <td>{{ e.date | date: 'yyyy-MM-dd' }}</td>
           <td>{{ e.paymentMode }}</td>
           <td>
-            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(e)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="onDelete(e)">Delete</button>
+            <button class="btn btn-warning btn-sm me-2" (click)="onEdit(e)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(e)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
           </td>
         </tr>
         <tr *ngIf="expensesData.length === 0">
-          <td colspan="7" class="text-center fw-bold py-4">No Data Found</td>
+          <td colspan="7" class="text-danger text-center">No records found</td>
         </tr>
       </tbody>
     </table>

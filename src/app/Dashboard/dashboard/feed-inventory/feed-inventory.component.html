@@ -72,12 +72,11 @@
   <div *ngIf="!isvisible">
     <h4>Feed Inventory List</h4>
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-success" (click)="onAdd()">Add Feed</button>
+      <button class="btn btn-primary btn-purple" style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); border: none; color: #fff;" (click)="onAdd()">Add Feed</button>
     </div>
-    <hr class="my-5" />
 
-    <table class="table table-bordered table-striped text-center">
-      <thead class="table-dark">
+    <table class="table table-bordered mt-3">
+      <thead class="table-white">
         <tr>
           <th>Feed ID</th>
           <th>Feed Type</th>
@@ -86,7 +85,7 @@
           <th>Quantity (kg)</th>
           <th>Price per Kg</th>
           <th>Total Price</th>
-          <th>Actions</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -99,12 +98,16 @@
           <td>{{ feed.pricePerKg }}</td>
           <td>{{ feed.quantity * feed.pricePerKg }}</td>
           <td>
-            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(feed)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="onDelete(feed)">Delete</button>
+            <button class="btn btn-warning btn-sm me-2" (click)="onEdit(feed)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(feed)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
           </td>
         </tr>
         <tr *ngIf="feedData.length === 0">
-          <td colspan="8" class="text-center py-4 fw-bold">No Data Found</td>
+          <td colspan="8" class="text-danger text-center">No records found</td>
         </tr>
       </tbody>
     </table>
