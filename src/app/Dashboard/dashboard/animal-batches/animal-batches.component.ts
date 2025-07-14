@@ -98,3 +98,4 @@ export class AnimalBatchesComponent implements OnInit {
       error: () => { alert('Failed to delete batch'); }
     });
   }
+}
