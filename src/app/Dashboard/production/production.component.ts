@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProductionComponent implements OnInit {
   productionForm!: FormGroup;
-  isvisible = false;
+  isvisible: boolean = false; // Table/grid is default view
   productionData: any[] = [];
 
   constructor(private fb: FormBuilder) {}
