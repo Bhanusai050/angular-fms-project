@@ -101,11 +101,11 @@ export class AnimalsComponent implements OnInit {
         if (animalId) {
           this.api.updateAnimal(animalId, animalPayload).subscribe({
             next: (res: any) => {
-              this.AnimalsData[this.editIndex] = res;
               alert('Animal updated successfully!');
               this.animalForm.reset({ purchaseDate: this.todayString, animalCost: 0 });
               this.isvisible = false;
               this.isEditing = false;
+              this.getAnimals(); // Refresh grid after edit
             },
             error: (err: any) => {
               alert('Failed to update animal');
@@ -119,9 +119,9 @@ export class AnimalsComponent implements OnInit {
         this.api.addAnimal(animalPayload).subscribe({
           next: (res: any) => {
             alert('Animal added successfully!');
-            this.AnimalsData.push(res);
             this.animalForm.reset({ purchaseDate: this.todayString, animalCost: 0 });
             this.isvisible = false;
+            this.getAnimals(); // Refresh grid after add
           },
           error: (err: any) => {
             alert('Failed to add animal');
@@ -160,11 +160,38 @@ export class AnimalsComponent implements OnInit {
       this.isEditing = true;
     }
 
-      onDelete(animal: any): void {
-      const index = this.AnimalsData.indexOf(animal);
-      if (index > -1) {
-      this.AnimalsData.splice(index, 1);
+
+    onDelete(animal: any): void {
+    const index = this.AnimalsData.indexOf(animal);
+    if (index > -1) {
+      const animalId = animal.AnimalID;
+      if (animalId) {
+        this.api.deleteAnimal(animalId).subscribe({
+          next: () => {
+            alert('Animal deleted successfully!');
+            this.getAnimals(); // Refresh grid after delete
+          },
+          error: (err: any) => {
+            alert('Failed to delete animal');
+            console.error('API Error:', err);
+          }
+        });
+      } else {
+        alert('Animal ID not found for delete.');
+      }
     }
+  }
+  // Helper to refresh grid after CRUD
+  getAnimals() {
+    this.api.getAnimals().subscribe({
+      next: (data) => {
+        this.AnimalsData = data;
+      },
+      error: (err) => {
+        console.error('Failed to fetch animals:', err);
+        this.AnimalsData = [];
+      }
+    });
   }
 
   // animals.component.ts

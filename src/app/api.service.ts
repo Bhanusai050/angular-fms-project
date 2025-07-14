@@ -15,6 +15,79 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class ApiService {
+  // ADD ANIMAL BATCH - POST: /api/animal-batches
+  addAnimalBatch(batchData: any) {
+    return this.http.post(
+      `${this.baseUrl}/api/animal-batches`,
+      batchData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal batch added:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // UPDATE ANIMAL BATCH - PUT: /api/animal-batches/{id}
+  updateAnimalBatch(id: number, batchData: any) {
+    return this.http.put(
+      `${this.baseUrl}/api/animal-batches/${id}`,
+      batchData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal batch updated:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+  // ANIMAL BATCHES CRUD
+  // GET: /api/animal-batches
+  getAnimalBatches(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/api/animal-batches`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal batches fetched:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // DELETE: /api/animal-batches/{id}
+  deleteAnimalBatch(id: number) {
+    return this.http.delete(
+      `${this.baseUrl}/api/animal-batches/${id}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Animal batch deleted:', id)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
   // ✅ ADD CUSTOMER - POST: /api/customers/add
   private baseUrl = 'https://localhost:44394'; // Your backend URL
 
@@ -236,6 +309,24 @@ export class ApiService {
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     ).pipe(
       tap(() => console.log('✅ Customer deleted:', id)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ DELETE ANIMAL - DELETE: /api/animals/delete/{id}
+  deleteAnimal(id: number) {
+    return this.http.delete(
+      `${this.baseUrl}/api/animals/delete/${id}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Animal deleted:', id)),
       catchError(err => {
         const msg = err.status === 0
           ? 'Network error – unable to reach the server.'

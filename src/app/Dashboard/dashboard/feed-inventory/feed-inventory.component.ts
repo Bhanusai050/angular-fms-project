@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../../api.service';
 
 @Component({
   selector: 'app-feed-inventory',
@@ -10,7 +11,7 @@ export class FeedInventoryComponent implements OnInit {
   isvisible: boolean = false; // Table/grid is default view
   feedData: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.feedForm = this.fb.group({
@@ -21,17 +22,52 @@ export class FeedInventoryComponent implements OnInit {
       quantity: ['', [Validators.required, Validators.min(1)]],
       pricePerKg: ['', [Validators.required, Validators.min(0)]]
     });
+    this.getFeedInventory();
+  }
+
+  // Helper to refresh grid after CRUD
+  getFeedInventory() {
+    this.api.getFeedInventory().subscribe({
+      next: (data) => {
+        this.feedData = data;
+      },
+      error: () => {
+        this.feedData = [];
+      }
+    });
   }
 
   onSubmit(): void {
     if (this.feedForm.invalid) {
-      this.feedForm.markAllAsTouched(); // highlight invalid fields
-      return; // prevent submission
+      this.feedForm.markAllAsTouched();
+      return;
     }
-
-    this.feedData.push(this.feedForm.value);
-    this.feedForm.reset();
-    this.isvisible = false;
+    const payload = this.feedForm.value;
+    if (payload.feedId) {
+      // Edit
+      this.api.updateFeedInventory(payload.feedId, payload).subscribe({
+        next: () => {
+          this.feedForm.reset();
+          this.isvisible = false;
+          this.getFeedInventory();
+        },
+        error: () => {
+          alert('Failed to update feed inventory');
+        }
+      });
+    } else {
+      // Add
+      this.api.addFeedInventory(payload).subscribe({
+        next: () => {
+          this.feedForm.reset();
+          this.isvisible = false;
+          this.getFeedInventory();
+        },
+        error: () => {
+          alert('Failed to add feed inventory');
+        }
+      });
+    }
   }
 
   onAdd(): void {
@@ -49,6 +85,13 @@ export class FeedInventoryComponent implements OnInit {
   }
 
   onDelete(feed: any): void {
-    this.feedData = this.feedData.filter(f => f !== feed);
+    this.api.deleteFeedInventory(feed.feedId).subscribe({
+      next: () => {
+        this.getFeedInventory();
+      },
+      error: () => {
+        alert('Failed to delete feed inventory');
+      }
+    });
   }
 }

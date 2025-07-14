@@ -12,8 +12,8 @@ export class CustomersComponent implements OnInit {
   isEditing: boolean = false;
   editIndex: number = -1;
   customerData: any[] = [];
-constructor(private fb: FormBuilder, private api: ApiService) {}
 
+  constructor(private fb: FormBuilder, private api: ApiService) {}
   ngOnInit(): void {
     this.customerForm = this.fb.group({
       customerId: ['', Validators.required],
@@ -22,10 +22,12 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required]
     });
-    // Fetch customers from backend on load
+    this.getCustomers();
+  }
+
+  getCustomers() {
     this.api.getCustomers().subscribe({
       next: (data) => {
-        console.log('Backend customer data:', data); // Debug log
         // Map backend fields to frontend fields for display
         this.customerData = data.map((c: any) => ({
           customerId: c.CustomerID,
@@ -63,11 +65,11 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
       if (customerId) {
         this.api.updateCustomer(customerId, customerPayload).subscribe({
           next: (res) => {
-            this.customerData[this.editIndex] = res;
             this.customerForm.reset();
             this.isvisible = false;
             this.isEditing = false;
             this.editIndex = -1;
+            this.getCustomers(); // Refresh grid after edit
           },
           error: (err) => {
             alert('Failed to update customer');
@@ -78,14 +80,13 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
         alert('Customer ID not found for update.');
       }
     } else {
-      // Send to backend
       this.api.addCustomer(customerPayload).subscribe({
         next: (res) => {
-          this.customerData.push(res);
           this.customerForm.reset();
           this.isvisible = false;
           this.isEditing = false;
           this.editIndex = -1;
+          this.getCustomers(); // Refresh grid after add
         },
         error: (err) => {
           alert('Failed to add customer');
@@ -128,7 +129,8 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
     if (customerId) {
       this.api.deleteCustomer(customerId).subscribe({
         next: () => {
-          this.customerData = this.customerData.filter(c => c.CustomerID !== customerId);
+          alert('Customer deleted successfully!');
+          this.getCustomers(); // Refresh grid after delete
         },
         error: (err) => {
           alert('Failed to delete customer');
