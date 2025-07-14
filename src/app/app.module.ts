@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { LoginComponent } from './Layout/login/login.component';
 import { ForgetpasswordComponent } from './Layout/forgetpassword/forgetpassword.component';
 import { SignUpComponent } from './Layout/sign-up/sign-up.component';
@@ -41,6 +42,7 @@ import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.compo
     ContactComponent,
     ResetPasswordComponent,
     OnlyNumberDirective,
+    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,

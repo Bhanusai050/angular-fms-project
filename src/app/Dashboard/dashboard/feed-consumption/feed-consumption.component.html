@@ -1,1 +1,23 @@
-<p>Feed Consumption works!</p>
+<div class="feed-consumption-card">
+  <div class="feed-consumption-title">Feed Consumption</div>
+  <table class="feed-consumption-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Batch</th>
+        <th>Feed Type</th>
+        <th>Quantity (kg)</th>
+        <th>Consumed By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of feedConsumption">
+        <td>{{ record.date }}</td>
+        <td>{{ record.batch }}</td>
+        <td>{{ record.feedType }}</td>
+        <td>{{ record.quantity }}</td>
+        <td>{{ record.consumedBy }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

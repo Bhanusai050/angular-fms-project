@@ -1,1 +1,12 @@
 <p>Company Info works!</p>
+<div class="company-info-card">
+  <div class="company-info-title">Company Information</div>
+  <ul class="company-info-list">
+    <li><span class="company-info-label">Company Name:</span> {{ company.CompanyName }}</li>
+    <li><span class="company-info-label">Owner Name:</span> {{ company.OwnerName }}</li>
+    <li><span class="company-info-label">Phone Number:</span> {{ company.PhoneNumber }}</li>
+    <li><span class="company-info-label">Email:</span> {{ company.Email }}</li>
+    <li><span class="company-info-label">Location:</span> {{ company.Location }}</li>
+    <li><span class="company-info-label">Created At:</span> {{ company.CreatedAt | date: 'yyyy-MM-dd' }}</li>
+  </ul>
+</div>

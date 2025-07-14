@@ -1,0 +1,21 @@
+<div class="main-layout">
+  <nav class="sidenav">
+    <div class="sidenav-header">
+      <img src="https://static.vecteezy.com/system/resources/previews/040/328/743/non_2x/cattle-animal-farm-livestock-logo-icon-and-template-illustration-vector.jpg" alt="Farm Logo" height="40" class="mb-3">
+      <div class="sidenav-title">Farm Dashboard</div>
+    </div>
+    <ul class="sidenav-links">
+      <li><a routerLink="/dashboard/animals" routerLinkActive="active"><i class="bi bi-cow"></i> Animals</a></li>
+      <li><a routerLink="/dashboard/feed-inventory" routerLinkActive="active"><i class="bi bi-box-seam"></i> Feed Inventory</a></li>
+      <li><a routerLink="/dashboard/feed-consumption" routerLinkActive="active"><i class="bi bi-egg-fried"></i> Feed Consumption</a></li>
+      <li><a routerLink="/dashboard/customers" routerLinkActive="active"><i class="bi bi-people"></i> Customers</a></li>
+      <li><a routerLink="/dashboard/assets" routerLinkActive="active"><i class="bi bi-truck"></i> Assets</a></li>
+      <li><a routerLink="/dashboard/animal-batches" routerLinkActive="active"><i class="bi bi-collection"></i> Animal Batches</a></li>
+      <li><a routerLink="/dashboard/admin-settings" routerLinkActive="active"><i class="bi bi-gear"></i> Admin Settings</a></li>
+      <li><a routerLink="/dashboard/company-info" routerLinkActive="active"><i class="bi bi-building"></i> Company Info</a></li>
+    </ul>
+  </nav>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

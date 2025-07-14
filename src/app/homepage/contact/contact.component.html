@@ -49,6 +49,7 @@
         [(ngModel)]="formData.name" #nameRef="ngModel"
         (keypress)="allowOnlyLetters($event)"
         [ngClass]="{'is-invalid': nameRef.invalid && nameRef.touched}"
+        placeholder="Enter your name" title="Name"
       />
     </div>
     <div *ngIf="nameRef.invalid && nameRef.touched" class="text-danger mt-1">
@@ -71,6 +72,7 @@
         #phoneRef="ngModel"
         [ngClass]="{'is-invalid': phoneRef.invalid && phoneRef.touched}"
         (keypress)="onPhoneKeypress($event)"
+        placeholder="Enter your phone number" title="Phone Number"
       />
     </div>
     <div *ngIf="phoneRef.invalid && phoneRef.touched" class="text-danger mt-1">
@@ -92,6 +94,7 @@
       [(ngModel)]="formData.email"
       #emailRef="ngModel"
       [ngClass]="{'is-invalid': emailRef.invalid && emailRef.touched}"
+      placeholder="Enter your email" title="Email"
     />
   </div>
   <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger mt-1">
@@ -109,6 +112,7 @@
         minlength="3" maxlength="150"
         [(ngModel)]="formData.message" #messageRef="ngModel"
         [ngClass]="{'is-invalid': messageRef.invalid && messageRef.touched}"
+        placeholder="Enter your message" title="Message"
       ></textarea>
     </div>
     <div *ngIf="messageRef.invalid && messageRef.touched" class="text-danger mt-1">
@@ -120,13 +124,12 @@
               <div class="d-flex gap-3">
     <button
       type="submit"
-      class="btn text-white w-50"
+      class="btn text-white w-50 contact-submit-btn"
       [disabled]="contactForm.invalid"
-      style="background-color: #a15088;"
     >
       Send Message
     </button>
-    <button type="button" class="btn text-white w-50" style="background-color: black;" routerLink="/">
+    <button type="button" class="btn text-white w-50 contact-back-btn" routerLink="/">
       Back to Home
     </button>
   </div>

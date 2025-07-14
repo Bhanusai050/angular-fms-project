@@ -1,1 +1,27 @@
 <p>Animal Batches works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Animal Batches</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Batch ID</th>
+          <th>Batch Name</th>
+          <th>Purchased Date</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let batch of animalBatchesData">
+          <td>{{ batch.BatchID }}</td>
+          <td>{{ batch.BatchName }}</td>
+          <td>{{ batch.PurchasedDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ batch.Purpose }}</td>
+        </tr>
+        <tr *ngIf="animalBatchesData.length === 0">
+          <td colspan="4" class="text-center fw-bold py-4">No Animal Batches Found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

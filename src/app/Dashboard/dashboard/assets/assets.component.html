@@ -1,1 +1,33 @@
 <p>Assets works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Assets</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Asset ID</th>
+          <th>Asset Name</th>
+          <th>Category</th>
+          <th>Purchase Date</th>
+          <th>Cost</th>
+          <th>Vendor</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asset of assetsData">
+          <td>{{ asset.AssetID }}</td>
+          <td>{{ asset.AssetName }}</td>
+          <td>{{ asset.Category }}</td>
+          <td>{{ asset.PurchaseDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ asset.Cost | currency }}</td>
+          <td>{{ asset.VendorName }}</td>
+          <td>{{ asset.Notes }}</td>
+        </tr>
+        <tr *ngIf="assetsData.length === 0">
+          <td colspan="7" class="text-center fw-bold py-4">No Assets Found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
