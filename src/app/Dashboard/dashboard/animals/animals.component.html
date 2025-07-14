@@ -32,16 +32,16 @@
         </div>
                   
 
-         <div class="col-md-4">
-            <label for="batchId" class="form-label">Batch Name <span class="text-danger">*</span></label>
-            <select class="form-select" id="batchId" formControlName="batchId" [class.is-invalid]="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.invalid">
-              <option [ngValue]="null">-- Select Batch --</option>
-              <option *ngFor="let batch of batches" [ngValue]="batch.BatchID">{{ batch.BatchName }}</option>
-            </select>
-            <div class="invalid-feedback" *ngIf="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.hasError('required')">
-              Batch is required.
-            </div>
+        <div class="col-md-4">
+          <label for="batchName" class="form-label">Batch Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="batchName" formControlName="batchName" placeholder="Enter Batch Name" [class.is-invalid]="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.invalid" />
+          <div class="invalid-feedback" *ngIf="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.hasError('required')">
+            Batch Name is required.
           </div>
+          <div class="invalid-feedback" *ngIf="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.hasError('maxlength')">
+            Maximum length is 50 characters.
+          </div>
+        </div>
 
         <div class="col-md-4">
           <label for="animalType" class="form-label">Animal Type <span class="text-danger">*</span></label>

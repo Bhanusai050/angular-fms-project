@@ -52,7 +52,7 @@ export class AnimalsComponent implements OnInit {
   ngOnInit() {
     this.animalForm = this.fb.group({
       animalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[A-Za-z ]+$')]],
-      batchId: [null, [Validators.required]],
+      batchName: ['', [Validators.required, Validators.maxLength(50)]],
       animalType: [null, Validators.required],
       gender: [null, Validators.required],
       healthStatus: [null, Validators.required],
@@ -82,8 +82,8 @@ export class AnimalsComponent implements OnInit {
     });
   }
   getBatchName(batchId: number): string {
-    const batch = this.batches.find(b => b.BatchID === batchId);
-    return batch ? batch.BatchName : String(batchId);
+    // Deprecated: Only batchName is used now
+    return '';
   }
 
   onSubmit() {
@@ -97,7 +97,7 @@ export class AnimalsComponent implements OnInit {
       const animalPayload = {
         AnimalName: formValue.animalName,
         AnimalTypeID: formValue.animalType, // ID
-        BatchID: formValue.batchId,         // ID
+        BatchName: formValue.batchName,     // Store as text
         GenderID: formValue.gender,         // ID
         HealthStatusID: formValue.healthStatus, // ID
         AnimalCost: formValue.animalCost,
@@ -158,7 +158,7 @@ export class AnimalsComponent implements OnInit {
       this.editIndex = this.AnimalsData.indexOf(animal);
       this.animalForm.patchValue({
         animalName: animal.AnimalName,
-        batchId: Number(animal.BatchID),
+        batchName: animal.BatchName || '',
         animalType: animal.AnimalTypeID,
         gender: animal.GenderID,
         healthStatus: animal.HealthStatusID,
