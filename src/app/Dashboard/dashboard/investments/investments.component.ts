@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 })
 export class InvestmentComponent {
-  isvisible = false;
+  isvisible: boolean = false; // Table/grid is default view
   investmentForm: FormGroup;
   investmentsData: any[] = [];
 

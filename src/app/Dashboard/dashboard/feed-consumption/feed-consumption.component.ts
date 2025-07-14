@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed-consumption.component.scss']
 })
 export class FeedConsumptionComponent implements OnInit {
+  isvisible: boolean = false; // Table/grid is default view
   feedConsumption = [
     { date: '2025-07-14', batch: 'Batch A', feedType: 'Corn', quantity: 120, consumedBy: 'Cattle' },
     { date: '2025-07-13', batch: 'Batch B', feedType: 'Soybean', quantity: 90, consumedBy: 'Sheep' },

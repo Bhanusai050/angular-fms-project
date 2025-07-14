@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-company-info',
   template: '<p>Company Info works!</p>'
 })
-export class CompanyInfoComponent {}
+export class CompanyInfoComponent {
+  isvisible: boolean = false; // Table/grid is default view
+}

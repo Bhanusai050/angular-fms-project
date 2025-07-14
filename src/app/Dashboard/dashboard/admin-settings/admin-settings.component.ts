@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-settings.component.scss']
 })
 export class AdminSettingsComponent implements OnInit {
+  isvisible: boolean = false; // Table/grid is default view
   rolesData = [
     { RoleID: 1, RoleName: 'Admin' },
     { RoleID: 2, RoleName: 'Manager' },

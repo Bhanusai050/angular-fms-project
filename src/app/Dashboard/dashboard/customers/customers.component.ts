@@ -8,10 +8,10 @@ import { ApiService } from '../../../api.service';
 })
 export class CustomersComponent implements OnInit {
   customerForm!: FormGroup;
-isvisible = false;
-isEditing: boolean = false;
-editIndex: number = -1;
-customerData: any[] = [];
+  isvisible: boolean = false; // Table/grid is default view
+  isEditing: boolean = false;
+  editIndex: number = -1;
+  customerData: any[] = [];
 constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {

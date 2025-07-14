@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FeedInventoryComponent implements OnInit {
   feedForm!: FormGroup;
-  isvisible = false;
+  isvisible: boolean = false; // Table/grid is default view
   feedData: any[] = [];
 
   constructor(private fb: FormBuilder) {}

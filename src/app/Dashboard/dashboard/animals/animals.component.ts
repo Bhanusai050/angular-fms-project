@@ -10,7 +10,7 @@ import { Inject } from '@angular/core';
 export class AnimalsComponent implements OnInit {
   animalForm!: FormGroup;
   AnimalsData: any = [];
-  isvisible: boolean = false;
+  isvisible: boolean = false; // Table/grid is default view
   isEditing: boolean = false;
   editIndex: number = -1;
   record: any;
