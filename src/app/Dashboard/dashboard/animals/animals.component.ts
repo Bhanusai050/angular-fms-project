@@ -43,11 +43,9 @@ export class AnimalsComponent implements OnInit {
     { id: 2, name: 'Vendor B' }
     // Add real vendor data here
   ];
-  batches = [
-    { id: 1, name: 'Batch 1' },
-    { id: 2, name: 'Batch 2' }
-    // Add real batch data here
-  ];
+
+  batches: any[] = [];
+
 
   constructor(private fb: FormBuilder, @Inject(ApiService) private api: ApiService) {}
 
@@ -63,6 +61,15 @@ export class AnimalsComponent implements OnInit {
       animalStatus: [null, Validators.required],
       purchaseDate: [this.todayString, Validators.required]
     });
+    // Fetch batches from backend
+    this.api.getAnimalBatches().subscribe({
+      next: (data) => {
+        this.batches = data;
+      },
+      error: () => {
+        this.batches = [];
+      }
+    });
     // Fetch animals from backend on load
     this.api.getAnimals().subscribe({
       next: (data) => {
@@ -73,6 +80,10 @@ export class AnimalsComponent implements OnInit {
         this.AnimalsData = [];
       }
     });
+  }
+  getBatchName(batchId: number): string {
+    const batch = this.batches.find(b => b.BatchID === batchId);
+    return batch ? batch.BatchName : String(batchId);
   }
 
   onSubmit() {
@@ -147,7 +158,7 @@ export class AnimalsComponent implements OnInit {
       this.editIndex = this.AnimalsData.indexOf(animal);
       this.animalForm.patchValue({
         animalName: animal.AnimalName,
-        batchId: animal.BatchID,
+        batchId: Number(animal.BatchID),
         animalType: animal.AnimalTypeID,
         gender: animal.GenderID,
         healthStatus: animal.HealthStatusID,

@@ -251,4 +251,78 @@ export class ApiService {
   get rememberedEmail(): string {
     return localStorage.getItem('remember_email') || '';
   }
+  // ANIMAL BATCHES CRUD
+  // GET: /api/animalbatches/get
+  getAnimalBatches(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/api/animalbatches/get`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal Batches fetched:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // POST: /api/animalbatches/add
+  addAnimalBatch(batchData: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/api/animalbatches/add`,
+      batchData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal Batch added:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // PUT: /api/animalbatches/update/{id}
+  updateAnimalBatch(id: number, batchData: any): Observable<any> {
+    return this.http.put(
+      `${this.baseUrl}/api/animalbatches/update/${id}`,
+      batchData,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(res => console.log('✅ Animal Batch updated:', res)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid input – please check your data.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // DELETE: /api/animalbatches/delete/{id}
+  deleteAnimalBatch(id: number): Observable<any> {
+    return this.http.delete(
+      `${this.baseUrl}/api/animalbatches/delete/${id}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Animal Batch deleted:', id)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
 }

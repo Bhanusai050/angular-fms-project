@@ -33,29 +33,14 @@
                   
 
          <div class="col-md-4">
-            <label for="batchId" class="form-label">Batch ID <span class="text-danger">*</span></label>
-           <input
-           type="text"
-            class="form-control"
-           id="batchId"
-           formControlName="batchId"
-           placeholder="Enter Batch ID"
-           [class.is-invalid]="
-           animalForm.get('batchId')?.touched &&
-           animalForm.get('batchId')?.invalid
-           "/>
-            <div class="invalid-feedback"
-              *ngIf="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.hasError('required')">
-              Batch ID is required.
+            <label for="batchId" class="form-label">Batch Name <span class="text-danger">*</span></label>
+            <select class="form-select" id="batchId" formControlName="batchId" [class.is-invalid]="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.invalid">
+              <option [ngValue]="null">-- Select Batch --</option>
+              <option *ngFor="let batch of batches" [ngValue]="batch.BatchID">{{ batch.BatchName }}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.hasError('required')">
+              Batch is required.
             </div>
-            <div class="invalid-feedback"
-             *ngIf="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.hasError('minlength')">
-              Batch ID must be at least 3 characters.
-            </div>
-            <div class="invalid-feedback"
-             *ngIf="animalForm.get('batchId')?.touched && animalForm.get('batchId')?.hasError('maxlength')">
-             Batch ID must not exceed 10 characters.
-           </div>
           </div>
 
         <div class="col-md-4">
@@ -225,7 +210,7 @@
       <thead class="table-white">
         <tr>
           <th>Name</th>
-          <th>Batch ID</th>
+          <th>Batch Name</th>
           <th>Type</th>
           <th>Gender</th>
           <th>Health</th>
@@ -239,7 +224,7 @@
       <tbody>
         <tr *ngFor="let animal of AnimalsData">
           <td>{{ animal.AnimalName }}</td>
-          <td>{{ animal.BatchID }}</td>
+          <td>{{ getBatchName(animal.BatchID) }}</td>
           <td>{{ getAnimalTypeName(animal.AnimalTypeID) }}</td>
           <td>{{ getGenderName(animal.GenderID) }}</td>
           <td>{{ getHealthStatusName(animal.HealthStatusID) }}</td>
