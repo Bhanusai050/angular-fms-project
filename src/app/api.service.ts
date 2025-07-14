@@ -338,8 +338,56 @@ export class ApiService {
     );
   }
 
+  // ✅ DELETE FEED INVENTORY - DELETE: /api/feed-inventory/{id}
+  deleteFeedInventory(feedId: number) {
+    return this.http.delete(
+      `${this.baseUrl}/api/feed-inventory/${feedId}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Feed inventory deleted:', feedId)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
+  // ✅ GET FEED INVENTORY - GET: /api/feed-inventory
+  getFeedInventory() {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/api/feed-inventory`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  // ✅ ADD FEED INVENTORY - POST: /api/feed-inventory
+  addFeedInventory(payload: any) {
+    return this.http.post(
+      `${this.baseUrl}/api/feed-inventory`,
+      payload,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  // ✅ UPDATE FEED INVENTORY - PUT: /api/feed-inventory/{id}
+  updateFeedInventory(feedId: number, payload: any) {
+    return this.http.put(
+      `${this.baseUrl}/api/feed-inventory/${feedId}`,
+      payload,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
   // 💾 GET remembered email
   get rememberedEmail(): string {
     return localStorage.getItem('remember_email') || '';
   }
+
+  feedConsumption = [
+    // ...your data here...
+  ];
 }

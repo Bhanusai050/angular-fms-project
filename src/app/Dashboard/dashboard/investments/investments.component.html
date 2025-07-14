@@ -40,7 +40,7 @@
          [ngClass]="{ 'is-invalid': investmentForm.get('description')?.invalid && investmentForm.get('description')?.touched }" />
   <div *ngIf="investmentForm.get('description')?.touched && investmentForm.get('description')?.invalid" class="text-danger">
     <small *ngIf="investmentForm.get('description')?.errors?.['required']">Description is required.</small>
-    <small *ngIf="investmentForm.get('description')?.errors?.['maxLength']">Max 200 characters allowed.</small>
+    <small *ngIf="investmentForm.get('description')?.errors?.['maxlength']">Max 200 characters allowed.</small>
   </div>
 </div>
 
@@ -82,11 +82,11 @@
       <button class="btn btn-danger btn-sm" (click)="onDelete(investment)">Delete</button>
     </td>
         </tr>
-        <tr *ngIf="investmentsData.length === 0">
-    <td colspan="6" class="text-center py-4 fw-bold">
-      No Data Found
-    </td>
-  </tr>
+       <tr *ngIf="investmentsData.length === 0">
+  <td colspan="5" class="text-center py-4 fw-bold">
+    No Data Found
+  </td>
+</tr>
         </tbody>
     </table>
   </div>

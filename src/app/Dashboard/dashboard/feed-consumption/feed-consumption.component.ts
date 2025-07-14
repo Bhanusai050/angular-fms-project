@@ -18,12 +18,5 @@ export class FeedConsumptionComponent implements OnInit {
 
   ngOnInit(): void {}
   isvisible: boolean = false; // Table/grid is default view
-  feedConsumption = [
-    { date: '2025-07-14', batch: 'Batch A', feedType: 'Corn', quantity: 120, consumedBy: 'Cattle' },
-    { date: '2025-07-13', batch: 'Batch B', feedType: 'Soybean', quantity: 90, consumedBy: 'Sheep' },
-    { date: '2025-07-12', batch: 'Batch C', feedType: 'Hay', quantity: 150, consumedBy: 'Goats' },
-    { date: '2025-07-11', batch: 'Batch D', feedType: 'Silage', quantity: 200, consumedBy: 'Cattle' },
-    { date: '2025-07-10', batch: 'Batch E', feedType: 'Grain Mix', quantity: 80, consumedBy: 'Poultry' }
-  ];
   // Add API logic and grid refresh as needed
 }
