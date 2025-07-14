@@ -14,6 +14,17 @@ import { VendorComponent } from '../vendor/vendor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { RbacGuard } from '../../rbac.guard';
+import { AnimalBatchesComponent } from './animal-batches/animal-batches.component';
+import { AssetsComponent } from './assets/assets.component';
+import { FeedPurchasesComponent } from './feed-purchases/feed-purchases.component';
+import { FeedConsumptionComponent } from './feed-consumption/feed-consumption.component';
+import { LandPurchasesComponent } from './land-purchases/land-purchases.component';
+import { WorkersComponent } from './workers/workers.component';
+import { SalariesComponent } from './salaries/salaries.component';
+import { CompanyInfoComponent } from './company-info/company-info.component';
+import { LookupManagementComponent } from './lookup-management/lookup-management.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +37,17 @@ import { RbacGuard } from '../../rbac.guard';
     OrdersComponent,
     ProductionComponent,
     VendorComponent,
+    AnimalBatchesComponent,
+    AssetsComponent,
+    FeedPurchasesComponent,
+    FeedConsumptionComponent,
+    LandPurchasesComponent,
+    WorkersComponent,
+    SalariesComponent,
+    CompanyInfoComponent,
+    LookupManagementComponent,
+    ReportsComponent,
+    AdminSettingsComponent,
     // Add other components here (if any)
   ],
   imports: [
