@@ -13,10 +13,10 @@ import { AnimalsComponent } from './Dashboard/dashboard/animals/animals.componen
 import { VendorComponent } from './Dashboard/vendor/vendor.component';
 import { FeedInventoryComponent } from './Dashboard/dashboard/feed-inventory/feed-inventory.component';
 import { OrdersComponent } from './Dashboard/dashboard/orders/orders.component';
-import { InvestmentComponent } from './Dashboard/dashboard/investments/investments.component';
 import { ProductionComponent } from './Dashboard/production/production.component';
 import { CustomersComponent } from './Dashboard/dashboard/customers/customers.component';
 import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.component';
+import { AnimalBatchesComponent } from './Dashboard/dashboard/animal-batches/animal-batches.component';
 
 
 
@@ -41,8 +41,8 @@ const routes: Routes = [
       { path: 'orders', component: OrdersComponent },
       { path: 'customers', component: CustomersComponent },
       { path: 'expenses', component: ExpensesComponent },
+      { path: 'animalbatches', component: AnimalBatchesComponent },
       // { path: 'settings', component: settingsComponent },
-      { path: 'investment', component: InvestmentComponent },
       { path: 'production', component: ProductionComponent },
       
     ]

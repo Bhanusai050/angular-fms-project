@@ -58,6 +58,10 @@ export class LoginComponent implements OnInit {
     this.api.login(email, password, remember).subscribe({
       next: (resp: LoginResponse) => {
         // Token and email are already saved in api.service.ts
+        // Save username for dashboard display
+        if (resp && resp.username) {
+          localStorage.setItem('username', resp.username);
+        }
         this.successMessage = 'Login successful!';
         this.router.navigate(['/Dashboard']);
       },
