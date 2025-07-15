@@ -7,9 +7,9 @@ namespace FmsAPI.Service
 {
   public class IdLookupService : IIdLookupService
   {
-    private readonly FarmManagementSystemEntities _context;
+    private readonly FarmManagementSystemEnities _context;
 
-    public IdLookupService(FarmManagementSystemEntities context)
+    public IdLookupService(FarmManagementSystemEnities context)
     {
       _context = context;
     }

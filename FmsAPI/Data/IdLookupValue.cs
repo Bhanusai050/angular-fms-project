@@ -14,8 +14,33 @@ namespace FmsAPI.Data
     
     public partial class IdLookupValue
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IdLookupValue()
+        {
+            this.Animals = new HashSet<Animal>();
+            this.Animals1 = new HashSet<Animal>();
+            this.Animals2 = new HashSet<Animal>();
+            this.Animals3 = new HashSet<Animal>();
+            this.Feed_Inventory = new HashSet<Feed_Inventory>();
+            this.FeedPurchases = new HashSet<FeedPurchas>();
+        }
+    
         public int IdValueID { get; set; }
         public Nullable<int> IdLookupID { get; set; }
         public string ValueName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feed_Inventory> Feed_Inventory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FeedPurchas> FeedPurchases { get; set; }
+        public virtual IdLookup IdLookup { get; set; }
     }
 }

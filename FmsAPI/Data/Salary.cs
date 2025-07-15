@@ -19,5 +19,7 @@ namespace FmsAPI.Data
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string Notes { get; set; }
+    
+        public virtual Worker Worker { get; set; }
     }
 }

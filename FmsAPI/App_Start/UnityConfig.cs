@@ -15,7 +15,7 @@ namespace FmsAPI
         {
 			var container = new UnityContainer();
             container.RegisterType<IAnimalSerivce, AnimalService>();
-            container.RegisterType<FarmManagementSystemEntities>();
+            container.RegisterType<FarmManagementSystemEnities>();
             container.RegisterType<ICompanyService, CompanyService>();
             container.RegisterType<IVendorService, VendorService>();
             container.RegisterType<IIdLookupService, IdLookupService>();

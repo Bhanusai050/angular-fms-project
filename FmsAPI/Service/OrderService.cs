@@ -1,4 +1,4 @@
-﻿using FmsAPI.Data;
+using FmsAPI.Data;
 using FmsAPI.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ namespace FmsAPI.Service
 {
     public class OrderService : IOrderService
     {
-        FarmManagementSystemEntities context = new FarmManagementSystemEntities();
+    FarmManagementSystemEnities context = new FarmManagementSystemEnities();
 
         public List<Order> GetOrders()
         {

@@ -7,9 +7,9 @@ namespace FmsAPI.Service
 {
   public class FeedInventoryService : IFeedInventoryService
   {
-    private readonly FarmManagementSystemEntities _context;
+    private readonly FarmManagementSystemEnities _context;
 
-    public FeedInventoryService(FarmManagementSystemEntities context)
+    public FeedInventoryService(FarmManagementSystemEnities context)
     {
       _context = context;
     }

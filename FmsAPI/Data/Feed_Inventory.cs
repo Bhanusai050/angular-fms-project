@@ -14,10 +14,23 @@ namespace FmsAPI.Data
     
     public partial class Feed_Inventory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Feed_Inventory()
+        {
+            this.Expenses = new HashSet<Expens>();
+            this.Feed_Consumption = new HashSet<Feed_Consumption>();
+        }
+    
         public int FeedID { get; set; }
         public Nullable<int> FeedTypeID { get; set; }
         public Nullable<decimal> StockQuantity { get; set; }
         public string Unit { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Expens> Expenses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feed_Consumption> Feed_Consumption { get; set; }
+        public virtual IdLookupValue IdLookupValue { get; set; }
     }
 }

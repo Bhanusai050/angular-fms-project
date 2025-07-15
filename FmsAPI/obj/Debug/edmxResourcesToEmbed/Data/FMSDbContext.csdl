@@ -433,11 +433,12 @@
       <PropertyRef Name="VendorID" />
     </Key>
     <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="VendorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VendorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="VendorType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Worker">
     <Key>

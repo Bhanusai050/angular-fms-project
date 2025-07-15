@@ -7,9 +7,9 @@ namespace FmsAPI.Service
 {
   public class ExpenseService : IExpenseService
   {
-    private readonly FarmManagementSystemEntities _context;
+    private readonly FarmManagementSystemEnities _context;
 
-    public ExpenseService(FarmManagementSystemEntities context)
+    public ExpenseService(FarmManagementSystemEnities context)
     {
       _context = context;
     }

@@ -14,6 +14,14 @@ namespace FmsAPI.Data
     
     public partial class Animal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Animal()
+        {
+            this.Expenses = new HashSet<Expens>();
+            this.Feed_Consumption = new HashSet<Feed_Consumption>();
+            this.Productions = new HashSet<Production>();
+        }
+    
         public int AnimalID { get; set; }
         public Nullable<int> AnimalTypeID { get; set; }
         public string AnimalName { get; set; }
@@ -25,5 +33,18 @@ namespace FmsAPI.Data
         public Nullable<int> AnimalStatusID { get; set; }
         public Nullable<System.DateTime> AnimalPurchasedDate { get; set; }
         public Nullable<int> BatchID { get; set; }
+    
+        public virtual AnimalBatch AnimalBatch { get; set; }
+        public virtual IdLookupValue IdLookupValue { get; set; }
+        public virtual IdLookupValue IdLookupValue1 { get; set; }
+        public virtual IdLookupValue IdLookupValue2 { get; set; }
+        public virtual IdLookupValue IdLookupValue3 { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Expens> Expenses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feed_Consumption> Feed_Consumption { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Production> Productions { get; set; }
     }
 }
