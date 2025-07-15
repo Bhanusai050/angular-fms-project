@@ -17,7 +17,7 @@ export interface LoginResponse {
 })
 export class ApiService {
   // ✅ ADD CUSTOMER - POST: /api/customers/add
-  private baseUrl = 'https://localhost:44394'; // Your backend URL
+  private baseUrl = 'https://192.168.1.108:44394'; // Your backend URL
 
   constructor(private http: HttpClient) {}
 
