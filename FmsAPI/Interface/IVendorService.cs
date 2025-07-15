@@ -1,14 +1,15 @@
-﻿using FmsAPI.Data;
-using System;
+using FmsAPI.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FmsAPI.Interface
 {
-    public interface IVendorService
-    {
-        List<Vendor> GetVendors();
-    }
+  public interface IVendorService
+  {
+    List<Vendor> GetVendors();
+    Vendor GetVendorById(int id);
+    bool AddVendor(Vendor vendor);
+    bool UpdateVendor(Vendor vendor);
+    bool DeleteVendor(int id);
+  }
 }
+

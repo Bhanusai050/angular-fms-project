@@ -1,4 +1,4 @@
-﻿using FmsAPI.Interface;
+using FmsAPI.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +24,18 @@ namespace FmsAPI.Controllers
             var lookups = _idLookupService.GetIdLookups();
             return Ok(lookups);
         }
+
+    [HttpGet]
+    [Route("GetIdLookup/{id}")]
+    public IHttpActionResult GetIdLookupById(int id)
+    {
+      var lookup = _idLookupService.GetIdLookupById(id);
+      if (lookup == null)
+      {
+        return NotFound();
+      }
+      return Ok(lookup);
     }
+
+  }
 }

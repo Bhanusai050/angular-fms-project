@@ -1,14 +1,14 @@
-﻿using FmsAPI.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FmsAPI.Data;
 
 namespace FmsAPI.Interface
 {
-    public interface IExpenseService
-    {
-        List<Expens> GetExpenses();
-    }
+  public interface IExpenseService
+  {
+    List<Expens> GetAll();
+    Expens GetById(int id);
+    void Add(Expens expense);
+    void Update(Expens expense);
+    void Delete(int id);
+  }
 }
