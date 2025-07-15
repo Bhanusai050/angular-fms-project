@@ -4,41 +4,41 @@
     <form [formGroup]="animalForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="row g-3">
         <div class="col-md-4">
-          <label for="animalName" class="form-label">Animal Name <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="animalName" formControlName="animalName"
+          <label for="AnimalName" class="form-label">Animal Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="AnimalName" formControlName="AnimalName"
             placeholder="Enter Animal Name" [class.is-invalid]="
-           animalForm.get('animalName')?.touched &&
-           animalForm.get('animalName')?.invalid
+           animalForm.get('AnimalName')?.touched &&
+           animalForm.get('AnimalName')?.invalid
           " />
           <!-- Validation Messages -->
           <div class="invalid-feedback"
-            *ngIf="animalForm.get('animalName')?.touched && animalForm.get('animalName')?.hasError('required')">
+            *ngIf="animalForm.get('AnimalName')?.touched && animalForm.get('AnimalName')?.hasError('required')">
             Animal Name is required.
           </div>
 
           <div class="invalid-feedback"
-            *ngIf="animalForm.get('animalName')?.touched && animalForm.get('animalName')?.hasError('minlength')">
+            *ngIf="animalForm.get('AnimalName')?.touched && animalForm.get('AnimalName')?.hasError('minlength')">
             Minimum length is 3 characters.
           </div>
 
           <div class="invalid-feedback"
-            *ngIf="animalForm.get('animalName')?.touched && animalForm.get('animalName')?.hasError('maxlength')">
+            *ngIf="animalForm.get('AnimalName')?.touched && animalForm.get('AnimalName')?.hasError('maxlength')">
             Maximum length is 15 characters.
           </div>
           <div class="invalid-feedback"
-            *ngIf="animalForm.get('animalName')?.touched && animalForm.get('animalName')?.hasError('pattern')">
+            *ngIf="animalForm.get('AnimalName')?.touched && animalForm.get('AnimalName')?.hasError('pattern')">
             Only  characters Allowes.
           </div>
         </div>
                   
 
         <div class="col-md-4">
-          <label for="batchName" class="form-label">Batch Name <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="batchName" formControlName="batchName" placeholder="Enter Batch Name" [class.is-invalid]="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.invalid" />
-          <div class="invalid-feedback" *ngIf="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.hasError('required')">
-            Batch Name is required.
+          <label for="BatchID" class="form-label">Batch <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="BatchID" formControlName="BatchID" placeholder="Enter Batch" [class.is-invalid]="animalForm.get('BatchID')?.touched && animalForm.get('BatchID')?.invalid" />
+          <div class="invalid-feedback" *ngIf="animalForm.get('BatchID')?.touched && animalForm.get('BatchID')?.hasError('required')">
+            BatchName is required.
           </div>
-          <div class="invalid-feedback" *ngIf="animalForm.get('batchName')?.touched && animalForm.get('batchName')?.hasError('maxlength')">
+          <div class="invalid-feedback" *ngIf="animalForm.get('BatchID')?.touched && animalForm.get('BatchID')?.hasError('maxlength')">
             Maximum length is 50 characters.
           </div>
         </div>
@@ -131,19 +131,19 @@
         </div>
 
         <div class="col-md-4">
-          <label for="venderName" class="form-label">Vendor Name <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="venderName" formControlName="venderName" placeholder="Vendor Name"
+          <label for="VendorID" class="form-label">Vendor <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="VendorID" formControlName="VendorID" placeholder="Vendor "
             [class.is-invalid]="
-         animalForm.get('venderName')?.touched &&
-         animalForm.get('venderName')?.invalid
+         animalForm.get('VendorID')?.touched &&
+         animalForm.get('VendorID')?.invalid
         ">
           <div class="invalid-feedback" 
-          *ngIf="animalForm.get('venderName')?.touched && animalForm.get('venderName')?.hasError('required')
+          *ngIf="animalForm.get('VendorID')?.touched && animalForm.get('VendorID')?.hasError('required')
          ">
-            venderName is required.
+            VendorID is required.
           </div>
            <div class="invalid-feedback"
-            *ngIf="animalForm.get('venderName')?.touched && animalForm.get('vendorName')?.hasError('pattern')">
+            *ngIf="animalForm.get('VendorID')?.touched && animalForm.get('VendorID')?.hasError('pattern')">
             Only  characters Allowes.
           </div>
 
@@ -170,19 +170,19 @@
 
 
         <div class="col-md-4">
-          <label for="purchaseDate" class="form-label">purchaseDate <span class="text-danger">*</span></label>
-          <input type="date" class="form-control" id="purchaseDate" formControlName="purchaseDate"
+          <label for="AnimalPurchasedDate" class="form-label">AnimalPurchasedDate <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" id="AnimalPurchasedDate" formControlName="AnimalPurchasedDate"
              [class.is-invalid]="
-             animalForm.get('purchaseDate')?.touched &&
-             animalForm.get('purchaseDate')?.invalid
+             animalForm.get('AnimalPurchasedDate')?.touched &&
+             animalForm.get('AnimalPurchasedDate')?.invalid
              "/>
 
             <!-- required -->
          <div
            class="invalid-feedback"
            *ngIf="
-           animalForm.get('purchaseDate')?.touched &&
-           animalForm.get('purchaseDate')?.hasError('required')
+           animalForm.get('AnimalPurchasedDate')?.touched &&
+           animalForm.get('AnimalPurchasedDate')?.hasError('required')
            ">
            Purchase date is required.
           </div>
@@ -210,14 +210,14 @@
       <thead class="table-white">
         <tr>
           <th>Name</th>
-          <th>Batch Name</th>
+          <th>Batch</th>
           <th>Type</th>
           <th>Gender</th>
           <th>Health</th>
           <th>Cost</th>
           <th>Vendor</th>
           <th>Status</th>
-          <th>Purchase Date</th>
+          <th>Animal Purchase Date</th>
           <th class="text-center">Action</th>
         </tr>
       </thead>

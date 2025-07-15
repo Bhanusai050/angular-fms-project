@@ -2,6 +2,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../api.service';
 
+export interface CustomerApiResponse {
+  CustomerID: number;
+  FullName: string;
+  PhoneNumber: string;
+  Email: string;
+  Location: string;
+}
+
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html'
@@ -17,23 +25,21 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
   ngOnInit(): void {
     this.customerForm = this.fb.group({
       customerId: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      FullName: ['', Validators.required],
+      PhoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required]
     });
     // Fetch customers from backend on load
     this.api.getCustomers().subscribe({
-      next: (data) => {
-        console.log('Backend customer data:', data); // Debug log
-        // Map backend fields to frontend fields for display
-        this.customerData = data.map((c: any) => ({
+      next: (data: CustomerApiResponse[]) => {
+        this.customerData = data.map((c) => ({
           customerId: c.CustomerID,
-          name: c.Fullname,
-          phone: c.Phonenumber,
+          FullName: c.FullName,
+          PhoneNumber: c.PhoneNumber,
           email: c.Email,
           address: c.Location,
-          CustomerID: c.CustomerID // keep original for edit/delete
+          CustomerID: c.CustomerID
         }));
       },
       error: (err) => {
@@ -52,8 +58,8 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
     // Map frontend fields to backend property names
     const customerPayload = {
       CustomerID: formValue.customerId,
-      Fullname: formValue.name,
-      Phonenumber: formValue.phone,
+      FullName: formValue.FullName,
+      PhoneNumber: formValue.PhoneNumber,
       Email: formValue.email,
       Location: formValue.address
     };
@@ -62,8 +68,15 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
       const customerId = this.customerData[this.editIndex]?.CustomerID;
       if (customerId) {
         this.api.updateCustomer(customerId, customerPayload).subscribe({
-          next: (res) => {
-            this.customerData[this.editIndex] = res;
+          next: (res: CustomerApiResponse) => {
+            this.customerData[this.editIndex] = {
+              customerId: res.CustomerID,
+              FullName: res.FullName,
+              PhoneNumber: res.PhoneNumber,
+              email: res.Email,
+              address: res.Location,
+              CustomerID: res.CustomerID
+            };
             this.customerForm.reset();
             this.isvisible = false;
             this.isEditing = false;
@@ -80,8 +93,15 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
     } else {
       // Send to backend
       this.api.addCustomer(customerPayload).subscribe({
-        next: (res) => {
-          this.customerData.push(res);
+        next: (res: CustomerApiResponse) => {
+          this.customerData.push({
+            customerId: res.CustomerID,
+            FullName: res.FullName,
+            PhoneNumber: res.PhoneNumber,
+            email: res.Email,
+            address: res.Location,
+            CustomerID: res.CustomerID
+          });
           this.customerForm.reset();
           this.isvisible = false;
           this.isEditing = false;
@@ -114,8 +134,8 @@ constructor(private fb: FormBuilder, private api: ApiService) {}
     // Patch only frontend fields
     this.customerForm.patchValue({
       customerId: customer.customerId,
-      name: customer.name,
-      phone: customer.phone,
+      FullName: customer.FullName,
+      PhoneNumber: customer.PhoneNumber,
       email: customer.email,
       address: customer.address
     });

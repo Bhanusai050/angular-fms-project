@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { CustomerApiResponse } from './Dashboard/dashboard/customers/customers.component'; // Adjust path if needed
 
 export interface LoginResponse {
   token: string;
@@ -174,58 +175,28 @@ export class ApiService {
   }
 
   // ✅ ADD CUSTOMER - POST: /api/customers/add
-  addCustomer(customerData: any): Observable<any> {
-    return this.http.post(
+  addCustomer(customerData: any): Observable<CustomerApiResponse> {
+    return this.http.post<CustomerApiResponse>(
       `${this.baseUrl}/api/customers/add`,
       customerData,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
-    ).pipe(
-      tap(res => console.log('✅ Customer added:', res)),
-      catchError(err => {
-        const msg = err.status === 0
-          ? 'Network error – unable to reach the server.'
-          : err.status >= 400 && err.status < 500
-            ? 'Invalid input – please check your data.'
-            : 'Server error – please try again later.';
-        return throwError(() => new Error(msg));
-      })
     );
   }
 
   // ✅ GET CUSTOMERS - GET: /api/customers/all
-  getCustomers(): Observable<any[]> {
-    return this.http.get<any[]>(
+  getCustomers(): Observable<CustomerApiResponse[]> {
+    return this.http.get<CustomerApiResponse[]>(
       `${this.baseUrl}/api/customers/all`,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
-    ).pipe(
-      tap(res => console.log('✅ Customers fetched:', res)),
-      catchError(err => {
-        const msg = err.status === 0
-          ? 'Network error – unable to reach the server.'
-          : err.status >= 400 && err.status < 500
-            ? 'Invalid request.'
-            : 'Server error – please try again later.';
-        return throwError(() => new Error(msg));
-      })
     );
   }
 
   // ✅ UPDATE CUSTOMER - PUT: /api/customers/update/{id}
-  updateCustomer(id: number, customerData: any) {
-    return this.http.put(
+  updateCustomer(id: number, customerData: any): Observable<CustomerApiResponse> {
+    return this.http.put<CustomerApiResponse>(
       `${this.baseUrl}/api/customers/update/${id}`,
       customerData,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
-    ).pipe(
-      tap(res => console.log('✅ Customer updated:', res)),
-      catchError(err => {
-        const msg = err.status === 0
-          ? 'Network error – unable to reach the server.'
-          : err.status >= 400 && err.status < 500
-            ? 'Invalid input – please check your data.'
-            : 'Server error – please try again later.';
-        return throwError(() => new Error(msg));
-      })
     );
   }
 
@@ -324,5 +295,61 @@ export class ApiService {
         return throwError(() => new Error(msg));
       })
     );
+  }
+
+  // GET: /api/vendor/all
+  getVendors(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/vendor/all`, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+
+  // POST: /api/vendor/add
+  addVendor(vendorData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/vendor/add`, vendorData, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+
+  // PUT: /api/vendor/update/{id}
+  updateVendor(id: number, vendorData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/vendor/update/${id}`, vendorData, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+
+  // DELETE: /api/vendor/delete/{id}
+  deleteVendor(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/vendor/delete/${id}`, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+  }
+
+  // GET: /api/feedtypes/all
+  getFeedTypes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/feedtypes/all`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // ORDER CRUD OPERATIONS
+  // POST: /api/orders/add
+  addOrder(orderData: any) {
+    return this.http.post(`${this.baseUrl}/api/orders/add`, orderData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // GET: /api/orders/all
+  getOrders() {
+    return this.http.get<any[]>(`${this.baseUrl}/api/orders/get`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // PUT: /api/orders/update/{id}
+  updateOrder(id: number, orderData: any) {
+    return this.http.put(`${this.baseUrl}/api/orders/update/${id}`, orderData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // DELETE: /api/orders/delete/{id}
+  deleteOrder(id: number) {
+    return this.http.delete(`${this.baseUrl}/api/orders/delete/${id}`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 }

@@ -18,21 +18,21 @@
         </div>
 
         <div class="col-md-4">
-          <label for="name" class="form-label">Customer Name</label>
-          <input type="text" class="form-control" id="name" formControlName="name"
-            [class.is-invalid]="customerForm.get('name')?.touched && customerForm.get('name')?.invalid" />
-          <div class="invalid-feedback" *ngIf="customerForm.get('name')?.touched && customerForm.get('name')?.invalid">
-            Customer name is required.
+          <label for="FullName" class="form-label">Customer FullName</label>
+          <input type="text" class="form-control" id="FullName" formControlName="FullName"
+            [class.is-invalid]="customerForm.get('FullName')?.touched && customerForm.get('FullName')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('FullName')?.touched && customerForm.get('FullName')?.invalid">
+            Customer FullName is required.
           </div>
         </div>
 
         <div class="col-md-4">
-          <label for="phone" class="form-label">Phone Number</label>
-          <input type="text" class="form-control" id="phone" formControlName="phone"
-            [class.is-invalid]="customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid" />
-          <div class="invalid-feedback" *ngIf="customerForm.get('phone')?.touched && customerForm.get('phone')?.invalid">
-            <span *ngIf="customerForm.get('phone')?.errors?.['required']">Phone is required.</span>
-            <span *ngIf="customerForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number.</span>
+          <label for="PhoneNumber" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="PhoneNumber" formControlName="PhoneNumber"
+            [class.is-invalid]="customerForm.get('PhoneNumber')?.touched && customerForm.get('PhoneNumber')?.invalid" />
+          <div class="invalid-feedback" *ngIf="customerForm.get('PhoneNumber')?.touched && customerForm.get('PhoneNumber')?.invalid">
+            <span *ngIf="customerForm.get('PhoneNumber')?.errors?.['required']">Phone is required.</span>
+            <span *ngIf="customerForm.get('PhoneNumber')?.errors?.['pattern']">Enter a valid 10-digit phone number.</span>
           </div>
         </div>
 
@@ -79,8 +79,8 @@
       <thead class="table-white">
         <tr>
           <th>Customer ID</th>
-          <th>Name</th>
-          <th>Phone</th>
+          <th>FullName</th>
+          <th>PhoneNumber</th>
           <th>Email</th>
           <th>Address</th>
           <th class="text-center">Action</th>
@@ -89,8 +89,8 @@
       <tbody>
         <tr *ngFor="let c of customerData">
           <td>{{ c.customerId }}</td>
-          <td>{{ c.name }}</td>
-          <td>{{ c.phone }}</td>
+          <td>{{ c.FullName }}</td>
+          <td>{{ c.PhoneNumber }}</td>
           <td>{{ c.email }}</td>
           <td>{{ c.address }}</td>
           <td>

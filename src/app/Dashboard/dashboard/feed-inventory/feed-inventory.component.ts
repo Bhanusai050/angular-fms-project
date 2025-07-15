@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../../api.service';
 
 @Component({
   selector: 'app-feed-inventory',
@@ -8,18 +9,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FeedInventoryComponent implements OnInit {
   feedForm!: FormGroup;
   isvisible = false;
+  isEditing = false;
   feedData: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  feedTypes: { IdValueID: number, Name: string }[] = [
+    // Example static data; replace with API call if needed
+    { IdValueID: 1, Name: 'Grass' },
+    { IdValueID: 2, Name: 'Grain' },
+    { IdValueID: 3, Name: 'Silage' }
+  ];
+
+  constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.feedForm = this.fb.group({
-      feedId: ['', Validators.required],
+      feedName: ['', [Validators.required, Validators.maxLength(50)]],
       feedType: ['', Validators.required],
-      purchaseDate: ['', Validators.required],
-      vendor: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
-      pricePerKg: ['', [Validators.required, Validators.min(0)]]
+      Price: ['', Validators.required],
+      expiryDate: ['', Validators.required]
     });
   }
 
@@ -29,7 +37,14 @@ export class FeedInventoryComponent implements OnInit {
       return; // prevent submission
     }
 
-    this.feedData.push(this.feedForm.value);
+    const payload = {
+      FeedTypeID: this.feedForm.value.feedType,
+      StockQuantity: this.feedForm.value.quantity,
+      Price: this.feedForm.value.Price,
+      ExpiryDate: this.feedForm.value.expiryDate
+    };
+
+    this.feedData.push(payload);
     this.feedForm.reset();
     this.isvisible = false;
   }

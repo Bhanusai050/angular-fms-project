@@ -40,8 +40,8 @@ export class AnimalsComponent implements OnInit {
   ];
   vendors = [
     { id: 1, name: 'Vendor A' },
-    { id: 2, name: 'Vendor B' }
-    // Add real vendor data here
+    { id: 2, name: 'Vendor B' },
+    { id: 3, name: 'Suresh' }
   ];
 
   batches: any[] = [];
@@ -51,15 +51,15 @@ export class AnimalsComponent implements OnInit {
 
   ngOnInit() {
     this.animalForm = this.fb.group({
-      animalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[A-Za-z ]+$')]],
-      batchName: ['', [Validators.required, Validators.maxLength(50)]],
+      AnimalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[A-Za-z ]+$')]],
+      BatchID: [null, Validators.required], // will hold BatchID
       animalType: [null, Validators.required],
       gender: [null, Validators.required],
       healthStatus: [null, Validators.required],
       animalCost: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      venderName: [null, Validators.required],
+      VendorID: [null, Validators.required], // will hold VendorID
       animalStatus: [null, Validators.required],
-      purchaseDate: [this.todayString, Validators.required]
+      AnimalPurchasedDate: [this.todayString, Validators.required]
     });
     // Fetch batches from backend
     this.api.getAnimalBatches().subscribe({
@@ -81,73 +81,51 @@ export class AnimalsComponent implements OnInit {
       }
     });
   }
-  getBatchName(batchId: number): string {
+  getBatchName(BatchID: number): string {
     // Deprecated: Only batchName is used now
     return '';
   }
 
   onSubmit() {
-    const formatDate = (date: any) => {
-      if (!date) return null;
-      const d = new Date(date);
-      return d.toISOString().split('T')[0];
+    if (this.animalForm.invalid) return;
+
+    const formValue = this.animalForm.value;
+    const payload = {
+      AnimalID: this.isEditing && this.record ? this.record.AnimalID : undefined,
+      AnimalTypeID: formValue.animalType,
+      AnimalName: formValue.AnimalName,
+      BirthDate: formValue.birthDate ? new Date(formValue.birthDate).toISOString() : undefined,
+      GenderID: formValue.gender,
+      HealthStatusID: formValue.healthStatus,
+      AnimalCost: formValue.animalCost,
+      VendorID: formValue.VendorID, // already an ID
+      AnimalStatusID: formValue.animalStatus,
+      AnimalPurchasedDate: formValue.AnimalPurchasedDate ? new Date(formValue.AnimalPurchasedDate).toISOString() : undefined,
+      BatchID: formValue.BatchID // already an ID
     };
-    if (this.animalForm.valid) {
-      const formValue = this.animalForm.value;
-      const animalPayload = {
-        AnimalName: formValue.animalName,
-        AnimalTypeID: formValue.animalType, // ID
-        BatchName: formValue.batchName,     // Store as text
-        GenderID: formValue.gender,         // ID
-        HealthStatusID: formValue.healthStatus, // ID
-        AnimalCost: formValue.animalCost,
-        VendorID: formValue.venderName,     // ID
-        AnimalStatusID: formValue.animalStatus, // ID
-        AnimalPurchasedDate: formatDate(formValue.purchaseDate),
-        BirthDate: null
-      };
-      if (this.isEditing && this.editIndex > -1) {
-        // Use the correct ID for update
-        const animalId = this.AnimalsData[this.editIndex]?.AnimalID;
-        if (animalId) {
-          this.api.updateAnimal(animalId, animalPayload).subscribe({
-            next: (res: any) => {
-              this.AnimalsData[this.editIndex] = res;
-              alert('Animal updated successfully!');
-              this.animalForm.reset({ purchaseDate: this.todayString, animalCost: 0 });
-              this.isvisible = false;
-              this.isEditing = false;
-            },
-            error: (err: any) => {
-              alert('Failed to update animal');
-              console.error('API Error:', err);
-            }
-          });
-        } else {
-          alert('Animal ID not found for update.');
-        }
-      } else {
-        this.api.addAnimal(animalPayload).subscribe({
-          next: (res: any) => {
-            alert('Animal added successfully!');
-            this.AnimalsData.push(res);
-            this.animalForm.reset({ purchaseDate: this.todayString, animalCost: 0 });
-            this.isvisible = false;
-          },
-          error: (err: any) => {
-            alert('Failed to add animal');
-            console.error('API Error:', err);
-          }
-        });
-      }
+
+    const VendorID = this.getVendorName(formValue.VendorID);
+    const BatchID = this.getBatchName(formValue.BatchID);
+
+    if (!VendorID || !BatchID) {
+      alert('Invalid Vendor or Batch selected.');
+      return;
     }
+
+    this.api.addAnimal(payload).subscribe({
+      next: () => { /* handle success */ },
+      error: (err) => {
+        console.error('API Error:', err);
+        alert('Server error: ' + (err?.message || 'Please try again later.'));
+      }
+    });
   }
   
     onAdd()
     {
           this.isvisible=true;
           this.isEditing=false;
-          this.animalForm.reset({ purchaseDate: this.todayString, animalCost: 0 });
+          this.animalForm.reset({ AnimalPurchasedDate: this.todayString, animalCost: 0 });
     }
     oncancel()
     {
@@ -158,14 +136,14 @@ export class AnimalsComponent implements OnInit {
       this.editIndex = this.AnimalsData.indexOf(animal);
       this.animalForm.patchValue({
         animalName: animal.AnimalName,
-        batchName: animal.BatchName || '',
+        batch: animal.Batch|| '',
         animalType: animal.AnimalTypeID,
         gender: animal.GenderID,
         healthStatus: animal.HealthStatusID,
         animalCost: animal.AnimalCost,
-        venderName: animal.VendorID,
+        vendor: animal.Vendor,
         animalStatus: animal.AnimalStatusID,
-        purchaseDate: animal.AnimalPurchasedDate
+        animalPurchasedDate: animal.AnimalPurchasedDate
       });
       this.isvisible = true;
       this.isEditing = true;
