@@ -1,4 +1,4 @@
-﻿using FmsAPI.Data;
+using FmsAPI.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,6 @@ namespace FmsAPI.Interface
     public interface IIdLookupService
     {
         List<IdLookup> GetIdLookups();
-    }
+    IdLookup GetIdLookupById(int id);
+  }
 }

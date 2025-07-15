@@ -1,4 +1,4 @@
-﻿using FmsAPI.Controllers;
+using FmsAPI.Controllers;
 using FmsAPI.Data;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace FmsAPI.Service
 {
     public class IdLookupValuesService: IIdLookupValuesService
     {
-        FarmManagementSystemEntities context = new FarmManagementSystemEntities();
+    FarmManagementSystemEnities context = new FarmManagementSystemEnities();
 
         public List<IdLookupValue> GetIdLookupValues()
         {

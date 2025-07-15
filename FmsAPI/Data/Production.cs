@@ -14,10 +14,20 @@ namespace FmsAPI.Data
     
     public partial class Production
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Production()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int ProductionID { get; set; }
         public System.DateTime Date { get; set; }
         public string Type { get; set; }
         public Nullable<decimal> Quantity { get; set; }
         public Nullable<int> AnimalID { get; set; }
+    
+        public virtual Animal Animal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

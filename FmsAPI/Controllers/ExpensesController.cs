@@ -1,30 +1,59 @@
-﻿using FmsAPI.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using FmsAPI.Data;
+using FmsAPI.Interface;
 
 namespace FmsAPI.Controllers
 {
-    public class ExpensesController : ApiController
+  [RoutePrefix("api/expenses")]
+  public class ExpensesController : ApiController
+  {
+    private readonly IExpenseService _service;
+
+    public ExpensesController(IExpenseService service)
     {
-        private readonly IExpenseService _expenseService;
-
-        public ExpensesController(IExpenseService expenseService)
-        {
-            _expenseService = expenseService;
-        }
-
-        [HttpGet]
-        [Route("GetExpenses")]
-        public IHttpActionResult GetExpenses()
-        {
-            var expenses = _expenseService.GetExpenses();
-
-            
-            return Ok(expenses);
-        }
+      _service = service;
     }
+
+    [HttpGet]
+    [Route("getall")]
+    public IHttpActionResult GetAll()
+    {
+      return Ok(_service.GetAll());
+    }
+
+    [HttpGet]
+    [Route("get/{id:int}")]
+    public IHttpActionResult Get(int id)
+    {
+      var result = _service.GetById(id);
+      if (result == null) return NotFound();
+      return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("add")]
+    public IHttpActionResult Add([FromBody] Expens expense)
+    {
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      _service.Add(expense);
+      return Ok("Expense added successfully");
+    }
+
+    [HttpPut]
+    [Route("update")]
+    public IHttpActionResult Update([FromBody] Expens expense)
+    {
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      _service.Update(expense);
+      return Ok("Expense updated successfully");
+    }
+
+    [HttpDelete]
+    [Route("delete/{id:int}")]
+    public IHttpActionResult Delete(int id)
+    {
+      _service.Delete(id);
+      return Ok("Expense deleted successfully");
+    }
+  }
 }

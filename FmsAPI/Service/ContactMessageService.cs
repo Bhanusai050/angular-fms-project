@@ -1,4 +1,4 @@
-﻿using FmsAPI.Data;
+using FmsAPI.Data;
 using FmsAPI.Interface;
 using FmsAPI.Models;
 using System;
@@ -11,11 +11,11 @@ namespace FmsAPI.Service
 {
     public class ContactMessageService : IContactMessageService
     {
-        private readonly FarmManagementSystemEntities _context;
+        private readonly FarmManagementSystemEnities _context;
 
         public ContactMessageService()
         {
-            _context = new FarmManagementSystemEntities();
+            _context = new FarmManagementSystemEnities();
         }
 
         public async Task<List<ContactMessage>> GetAllMessagesAsync()

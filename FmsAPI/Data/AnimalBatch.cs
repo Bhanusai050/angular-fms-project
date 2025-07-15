@@ -14,9 +14,18 @@ namespace FmsAPI.Data
     
     public partial class AnimalBatch
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AnimalBatch()
+        {
+            this.Animals = new HashSet<Animal>();
+        }
+    
         public int BatchID { get; set; }
         public string BatchName { get; set; }
         public System.DateTime PurchasedDate { get; set; }
         public string Purpose { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals { get; set; }
     }
 }

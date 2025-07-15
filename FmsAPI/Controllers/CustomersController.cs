@@ -1,4 +1,4 @@
-﻿// C# Web API Controller (CustomersController.cs)
+// C# Web API Controller (CustomersController.cs)
 using FmsAPI.Data;
 using FmsAPI.Interface;
 using System.Web.Http;
