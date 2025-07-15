@@ -16,13 +16,17 @@ export class AnimalBatchesComponent implements OnInit {
   constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
-    this.batchForm = this.fb.group({
-      BatchID: [null],
+    this.createform();
+    this.getAnimalBatches();
+  }
+
+  createform(){
+     this.batchForm = this.fb.group({
+      BatchID: [0],
       BatchName: ['', [Validators.required, Validators.maxLength(50)]],
       PurchasedDate: ['', Validators.required],
       Purpose: ['', [Validators.required, Validators.maxLength(50)]]
     });
-    this.getAnimalBatches();
   }
 
   getAnimalBatches() {
@@ -37,6 +41,7 @@ export class AnimalBatchesComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger;
     if (this.batchForm.invalid) {
       this.batchForm.markAllAsTouched();
       return;
@@ -75,7 +80,7 @@ export class AnimalBatchesComponent implements OnInit {
     this.isvisible = true;
     this.isEditing = false;
     this.editIndex = -1;
-    this.batchForm.reset();
+    this.createform();
   }
 
   onCancel() {
@@ -87,7 +92,12 @@ export class AnimalBatchesComponent implements OnInit {
 
   onEdit(batch: any) {
     this.editIndex = this.animalBatchesData.indexOf(batch);
-    this.batchForm.patchValue(batch);
+     const formattedDate = batch.PurchasedDate?.split('T')[0];
+
+    this.batchForm.patchValue({
+    ...batch,
+    PurchasedDate: formattedDate
+  });
     this.isvisible = true;
     this.isEditing = true;
   }

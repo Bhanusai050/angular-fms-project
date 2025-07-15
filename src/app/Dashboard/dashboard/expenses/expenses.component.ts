@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../../api.service';
 
 @Component({
   selector: 'app-expenses',
@@ -10,28 +11,50 @@ export class ExpensesComponent implements OnInit {
   isvisible = false;
   expensesData: any[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private api: ApiService) {}
 
   ngOnInit(): void {
     this.expenseForm = this.fb.group({
-      expenseId: ['', Validators.required],
+      expenseId: [''],
       category: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.required], // This is your "category"
       amount: ['', [Validators.required, Validators.min(1)]],
-      date: ['', Validators.required],
-      paymentMode: ['', Validators.required]
+      date: [''],
+      paymentMode: ['']
+    });
+    this.loadExpenses();
+  }
+
+  loadExpenses(): void {
+    debugger;
+    this.api.getExpenses().subscribe({
+      next: data => this.expensesData = data,
+      error: () => this.expensesData = []
     });
   }
 
   onSubmit(): void {
-    if (this.expenseForm.invalid) {
-      this.expenseForm.markAllAsTouched();
-      return;
-    }
-
-    this.expensesData.push(this.expenseForm.value);
-    this.expenseForm.reset();
-    this.isvisible = false;
+    debugger
+        const formValue = this.expenseForm.value;
+        console.log('Form Value:', formValue);
+      const orderPayload = {
+        expenseId: formValue.expenseId,
+        category: formValue.category,
+        description: formValue.description,
+        amount: formValue.amount,
+        date: formValue.date,
+        paymentMode: formValue.paymentMode,
+  
+      };
+    this.api.addExpense(orderPayload).subscribe({
+      
+      next: () => {
+        this.loadExpenses();
+        this.expenseForm.reset();
+        this.isvisible = false;
+      },
+      error: () => alert('Failed to add expense')
+    });
   }
 
   onAdd(): void {
@@ -49,6 +72,11 @@ export class ExpensesComponent implements OnInit {
   }
 
   onDelete(expense: any): void {
-    this.expensesData = this.expensesData.filter(e => e !== expense);
+    if (expense.ExpenseID) {
+      this.api.deleteExpense(expense.ExpenseID).subscribe({
+        next: () => this.loadExpenses(),
+        error: () => alert('Failed to delete expense')
+      });
+    }
   }
 }

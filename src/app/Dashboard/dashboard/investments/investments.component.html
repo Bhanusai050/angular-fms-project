@@ -74,8 +74,8 @@
       <tbody>
         <tr *ngFor="let investment of investmentsData">
           <td>{{ investment.investmentId }}</td>
-          <td>{{ investment.date | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ investment.capitalAmount | currency }}</td>
+          <td>{{ investment.date  }}</td>
+          <td>{{ investment.capitalAmount  }}</td>
           <td>{{ investment.description }}</td>
     <td>
       <button class="btn btn-primary btn-sm me-2" (click)="onEdit(investment)">Edit</button>

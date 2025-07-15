@@ -42,6 +42,23 @@ export class ApiService {
     );
   }
 
+  deleteAnimal(animalId: number): Observable<any> {
+    return this.http.delete(
+      `${this.baseUrl}/api/animals/delete/${animalId}`,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).pipe(
+      tap(() => console.log('✅ Animal deleted:', animalId)),
+      catchError(err => {
+        const msg = err.status === 0
+          ? 'Network error – unable to reach the server.'
+          : err.status >= 400 && err.status < 500
+            ? 'Invalid request.'
+            : 'Server error – please try again later.';
+        return throwError(() => new Error(msg));
+      })
+    );
+  }
+
   // ✅ CONTACT US - Submit contact form
   submitContact(formData: { name: string; phoneNumber: string; email: string; message: string }): Observable<any> {
     return this.http.post(
@@ -226,7 +243,7 @@ export class ApiService {
   // GET: /api/animalbatches/get
   getAnimalBatches(): Observable<any[]> {
     return this.http.get<any[]>(
-      `${this.baseUrl}/api/animalbatches/get`,
+      `${this.baseUrl}/api/animalbatch`, // Confirm your backend supports this GET route
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     ).pipe(
       tap(res => console.log('✅ Animal Batches fetched:', res)),
@@ -244,7 +261,7 @@ export class ApiService {
   // POST: /api/animalbatches/add
   addAnimalBatch(batchData: any): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}/api/animalbatches/add`,
+      `${this.baseUrl}/api/animalbatch`, // Correct POST route
       batchData,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     ).pipe(
@@ -261,9 +278,9 @@ export class ApiService {
   }
 
   // PUT: /api/animalbatches/update/{id}
-  updateAnimalBatch(id: number, batchData: any): Observable<any> {
+   updateAnimalBatch(id: number, batchData: any): Observable<any> {
     return this.http.put(
-      `${this.baseUrl}/api/animalbatches/update/${id}`,
+      `${this.baseUrl}/api/animalbatch/${id}`, // Correct PUT route
       batchData,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     ).pipe(
@@ -280,9 +297,9 @@ export class ApiService {
   }
 
   // DELETE: /api/animalbatches/delete/{id}
-  deleteAnimalBatch(id: number): Observable<any> {
+   deleteAnimalBatch(id: number): Observable<any> {
     return this.http.delete(
-      `${this.baseUrl}/api/animalbatches/delete/${id}`,
+      `${this.baseUrl}/api/animalbatch/${id}`, // Correct DELETE route
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     ).pipe(
       tap(() => console.log('✅ Animal Batch deleted:', id)),
@@ -296,6 +313,7 @@ export class ApiService {
       })
     );
   }
+
 
   // GET: /api/vendor/all
   getVendors(): Observable<any[]> {
@@ -349,6 +367,28 @@ export class ApiService {
   // DELETE: /api/orders/delete/{id}
   deleteOrder(id: number) {
     return this.http.delete(`${this.baseUrl}/api/orders/delete/${id}`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // EXPENSES CRUD OPERATIONS
+  // POST: /api/expenses/add
+  addExpense(expenseData: any) {
+    return this.http.post(`${this.baseUrl}/api/expenses/add`, expenseData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // GET: /api/expenses/all
+  getExpenses() {
+    return this.http.get<any[]>(`${this.baseUrl}/api/expenses/getall`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // DELETE: /api/expenses/delete/{id}
+  deleteExpense(id: number) {
+    return this.http.delete(`${this.baseUrl}/api/expenses/delete/${id}`, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }

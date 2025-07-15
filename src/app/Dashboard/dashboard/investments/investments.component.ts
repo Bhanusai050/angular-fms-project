@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './investments.component.html'
 
 })
-export class InvestmentComponent {
+export class investmentsComponent {
   isvisible = false;
   investmentForm: FormGroup;
   investmentsData: any[] = [];

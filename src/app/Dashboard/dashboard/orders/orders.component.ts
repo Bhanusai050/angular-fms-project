@@ -93,14 +93,17 @@ export class OrdersComponent {
       const orderPayload = {
         OrderID: formValue.orderID,
         CustomerID: formValue.customerID,
-        OrderDate: formValue.orderDate,
+        OrderDate: new Date(formValue.orderDate).toISOString(),
         PaymentStatus: formValue.paymentStatus,
         OrderStatus: formValue.orderStatus,
-        ProductionID: formValue.productionID,
+        ProductionID: formValue.ProductionID,
         Quantity: formValue.quantity,
         UnitPrice: formValue.unitPrice,
         TotalAmount: formValue.quantity * formValue.unitPrice
       };
+      if (formValue.orderID) {
+  orderPayload.OrderID = formValue.orderID;
+}
       this.api.addOrder(orderPayload).subscribe({
         next: () => {
           this.loadOrders();

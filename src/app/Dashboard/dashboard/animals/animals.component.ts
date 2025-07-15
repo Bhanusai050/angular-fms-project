@@ -39,9 +39,9 @@ export class AnimalsComponent implements OnInit {
     { id: 3, name: 'Active' }
   ];
   vendors = [
-    { id: 1, name: 'Vendor A' },
-    { id: 2, name: 'Vendor B' },
-    { id: 3, name: 'Suresh' }
+    { VendorID: 1, VendorName: 'Vendor A' },
+    { VendorID: 2, VendorName: 'Vendor B' },
+    { VendorID: 3, VendorName: 'Suresh' }
   ];
 
   batches: any[] = [];
@@ -50,9 +50,17 @@ export class AnimalsComponent implements OnInit {
   constructor(private fb: FormBuilder, @Inject(ApiService) private api: ApiService) {}
 
   ngOnInit() {
+    
+  this.createForm();
+   this.getAnimals();
+    this.loadVendors();
+    this.getbatchs();
+  }
+  createForm(){
     this.animalForm = this.fb.group({
       AnimalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[A-Za-z ]+$')]],
-      BatchID: [null, Validators.required], // will hold BatchID
+      BatchID: [null,Validators.required], // will hold BatchID
+      BirthDate: [new Date() ],
       animalType: [null, Validators.required],
       gender: [null, Validators.required],
       healthStatus: [null, Validators.required],
@@ -61,7 +69,9 @@ export class AnimalsComponent implements OnInit {
       animalStatus: [null, Validators.required],
       AnimalPurchasedDate: [this.todayString, Validators.required]
     });
-    // Fetch batches from backend
+  }
+  getbatchs() {
+       // Fetch batches from backend
     this.api.getAnimalBatches().subscribe({
       next: (data) => {
         this.batches = data;
@@ -70,7 +80,10 @@ export class AnimalsComponent implements OnInit {
         this.batches = [];
       }
     });
-    // Fetch animals from backend on load
+  }
+
+  getAnimals() {
+   // Fetch animals from backend on load
     this.api.getAnimals().subscribe({
       next: (data) => {
         this.AnimalsData = data;
@@ -80,6 +93,19 @@ export class AnimalsComponent implements OnInit {
         this.AnimalsData = [];
       }
     });
+
+  }
+
+  
+  loadVendors(): void {
+     this.vendors = [];
+    this.api.getVendors().subscribe({
+      next: data => this.vendors = data,
+      error: err => {
+        this.vendors = [];
+        console.error('Failed to load vendors:', err.message);
+      }
+    });
   }
   getBatchName(BatchID: number): string {
     // Deprecated: Only batchName is used now
@@ -87,6 +113,7 @@ export class AnimalsComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger;
     if (this.animalForm.invalid) return;
 
     const formValue = this.animalForm.value;
@@ -94,7 +121,7 @@ export class AnimalsComponent implements OnInit {
       AnimalID: this.isEditing && this.record ? this.record.AnimalID : undefined,
       AnimalTypeID: formValue.animalType,
       AnimalName: formValue.AnimalName,
-      BirthDate: formValue.birthDate ? new Date(formValue.birthDate).toISOString() : undefined,
+      BirthDate: formValue.BirthDate,
       GenderID: formValue.gender,
       HealthStatusID: formValue.healthStatus,
       AnimalCost: formValue.animalCost,
@@ -104,13 +131,13 @@ export class AnimalsComponent implements OnInit {
       BatchID: formValue.BatchID // already an ID
     };
 
-    const VendorID = this.getVendorName(formValue.VendorID);
-    const BatchID = this.getBatchName(formValue.BatchID);
+    // const VendorID = this.getVendorName(formValue.VendorID);
+    // const BatchID = this.getBatchName(formValue.BatchID);
 
-    if (!VendorID || !BatchID) {
-      alert('Invalid Vendor or Batch selected.');
-      return;
-    }
+    // if (!VendorID || !BatchID) {
+    //   alert('Invalid Vendor or Batch selected.');
+    //   return;
+    // }
 
     this.api.addAnimal(payload).subscribe({
       next: () => { /* handle success */ },
@@ -125,7 +152,8 @@ export class AnimalsComponent implements OnInit {
     {
           this.isvisible=true;
           this.isEditing=false;
-          this.animalForm.reset({ AnimalPurchasedDate: this.todayString, animalCost: 0 });
+            this.createForm();
+          //this.animalForm.reset({ AnimalPurchasedDate: this.todayString, animalCost: 0 });
     }
     oncancel()
     {
@@ -149,11 +177,11 @@ export class AnimalsComponent implements OnInit {
       this.isEditing = true;
     }
 
-      onDelete(animal: any): void {
-      const index = this.AnimalsData.indexOf(animal);
-      if (index > -1) {
-      this.AnimalsData.splice(index, 1);
-    }
+  onDelete(animal: any): void {
+      this.api.deleteAnimal(animal.AnimalID).subscribe({
+      next: () => { this.getAnimals(); },
+      error: () => { alert('Failed to delete animal'); }
+    });
   }
 
   // animals.component.ts
@@ -199,8 +227,8 @@ export class AnimalsComponent implements OnInit {
     return status ? status.name : String(id);
   }
   getVendorName(id: number): string {
-    const vendor = this.vendors.find(v => v.id === id);
-    return vendor ? vendor.name : String(id);
+    const vendor = this.vendors.find(v => v.VendorID === id);
+    return vendor ? vendor.VendorName : String(id);
   }
 }
 

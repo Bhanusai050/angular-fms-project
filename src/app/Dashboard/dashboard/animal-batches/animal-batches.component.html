@@ -63,7 +63,7 @@
       <tbody>
         <tr *ngFor="let batch of animalBatchesData">
           <td>{{ batch.BatchName }}</td>
-          <td>{{ batch.PurchasedDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ batch.PurchasedDate | date: 'dd-MMM-yy' }}</td>
           <td>{{ batch.Purpose }}</td>
           <td>
             <button class="btn btn-warning btn-sm me-2" (click)="onEdit(batch)">
@@ -81,6 +81,3 @@
     </table>
   </div>
 </div>
-<script>
-  isvisible: boolean = false; // This should be false by default
-</script>
