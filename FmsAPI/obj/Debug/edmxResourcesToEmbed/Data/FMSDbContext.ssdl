@@ -214,16 +214,6 @@
     <Property Name="Amount" Type="decimal" Precision="12" Scale="2" />
     <Property Name="Notes" Type="text" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="UserRoles">
     <Key>
       <PropertyRef Name="UserRoleID" />
@@ -247,11 +237,12 @@
       <PropertyRef Name="VendorID" />
     </Key>
     <Property Name="VendorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="VendorName" Type="varchar" MaxLength="100" />
-    <Property Name="Category" Type="varchar" MaxLength="50" />
-    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
-    <Property Name="Email" Type="varchar" MaxLength="100" />
-    <Property Name="Location" Type="varchar" MaxLength="100" />
+    <Property Name="VendorName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="VendorType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Location" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="Workers">
     <Key>
@@ -263,7 +254,7 @@
     <Property Name="HireDate" Type="date" />
     <Property Name="ContactInfo" Type="varchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK__Animals__AnimalS__42E1EEFE">
+  <Association Name="FK__Animals__AnimalS__59063A47">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
     <ReferentialConstraint>
@@ -275,7 +266,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Animals__AnimalT__3F115E1A">
+  <Association Name="FK__Animals__AnimalT__5535A963">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
     <ReferentialConstraint>
@@ -287,7 +278,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Animals__GenderI__40058253">
+  <Association Name="FK__Animals__BatchID__59FA5E80">
+    <End Role="AnimalBatches" Type="Self.AnimalBatches" Multiplicity="0..1" />
+    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnimalBatches">
+        <PropertyRef Name="BatchID" />
+      </Principal>
+      <Dependent Role="Animals">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Animals__GenderI__5629CD9C">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
     <ReferentialConstraint>
@@ -299,7 +302,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Animals__HealthS__40F9A68C">
+  <Association Name="FK__Animals__HealthS__571DF1D5">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,7 +314,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Animals__VendorI__41EDCAC5">
+  <Association Name="FK__Animals__VendorI__5812160E">
     <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
     <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
     <ReferentialConstraint>
@@ -323,7 +326,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Assets__VendorID__3C34F16F">
+  <Association Name="FK__Assets__VendorID__5070F446">
     <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
     <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
     <ReferentialConstraint>
@@ -335,7 +338,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Expenses__Linked__531856C7">
+  <Association Name="FK__Expenses__Linked__6A30C649">
     <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="0..1" />
     <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
     <ReferentialConstraint>
@@ -347,7 +350,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Expenses__Linked__540C7B00">
+  <Association Name="FK__Expenses__Linked__6B24EA82">
     <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
     <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
     <ReferentialConstraint>
@@ -359,7 +362,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Feed_Cons__Anima__4C6B5938">
+  <Association Name="FK__Feed_Cons__Anima__6383C8BA">
     <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
     <End Role="Feed_Consumption" Type="Self.Feed_Consumption" Multiplicity="*" />
     <ReferentialConstraint>
@@ -371,7 +374,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Feed_Cons__FeedI__4D5F7D71">
+  <Association Name="FK__Feed_Cons__FeedI__6477ECF3">
     <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="0..1" />
     <End Role="Feed_Consumption" Type="Self.Feed_Consumption" Multiplicity="*" />
     <ReferentialConstraint>
@@ -383,7 +386,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Feed_Inve__FeedT__45BE5BA9">
+  <Association Name="FK__Feed_Inve__FeedT__5CD6CB2B">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="Feed_Inventory" Type="Self.Feed_Inventory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -395,7 +398,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FeedPurch__FeedT__498EEC8D">
+  <Association Name="FK__FeedPurch__FeedT__60A75C0F">
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="0..1" />
     <End Role="FeedPurchases" Type="Self.FeedPurchases" Multiplicity="*" />
     <ReferentialConstraint>
@@ -407,7 +410,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FeedPurch__Vendo__489AC854">
+  <Association Name="FK__FeedPurch__Vendo__5FB337D6">
     <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
     <End Role="FeedPurchases" Type="Self.FeedPurchases" Multiplicity="*" />
     <ReferentialConstraint>
@@ -419,7 +422,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__IdLookupV__IdLoo__19DFD96B">
+  <Association Name="FK__IdLookupV__IdLoo__286302EC">
     <End Role="IdLookup" Type="Self.IdLookup" Multiplicity="0..1" />
     <End Role="IdLookupValues" Type="Self.IdLookupValues" Multiplicity="*" />
     <ReferentialConstraint>
@@ -431,7 +434,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__Customer__59C55456">
+  <Association Name="FK__Orders__Customer__70DDC3D8">
     <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
@@ -443,7 +446,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__Producti__5AB9788F">
+  <Association Name="FK__Orders__Producti__71D1E811">
     <End Role="Production" Type="Self.Production" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
@@ -455,7 +458,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Productio__Anima__503BEA1C">
+  <Association Name="FK__Productio__Anima__6754599E">
     <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
     <End Role="Production" Type="Self.Production" Multiplicity="*" />
     <ReferentialConstraint>
@@ -467,7 +470,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RolePermi__Permi__30C33EC3">
+  <Association Name="FK__RolePermi__Permi__3F466844">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
     <ReferentialConstraint>
@@ -479,7 +482,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RolePermi__RoleI__2FCF1A8A">
+  <Association Name="FK__RolePermi__RoleI__3E52440B">
     <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
     <ReferentialConstraint>
@@ -491,7 +494,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Salaries__Worker__5F7E2DAC">
+  <Association Name="FK__Salaries__Worker__76969D2E">
     <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
     <End Role="Salaries" Type="Self.Salaries" Multiplicity="*" />
     <ReferentialConstraint>
@@ -503,7 +506,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserRoles__RoleI__2BFE89A6">
+  <Association Name="FK__UserRoles__RoleI__3A81B327">
     <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
     <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -515,7 +518,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserRoles__UserI__2B0A656D">
+  <Association Name="FK__UserRoles__UserI__398D8EEE">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -524,18 +527,6 @@
       </Principal>
       <Dependent Role="UserRoles">
         <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Animals_BatchID">
-    <End Role="AnimalBatches" Type="Self.AnimalBatches" Multiplicity="0..1" />
-    <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AnimalBatches">
-        <PropertyRef Name="BatchID" />
-      </Principal>
-      <Dependent Role="Animals">
-        <PropertyRef Name="BatchID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -592,40 +583,9 @@
     <Parameter Name="Amount" Type="decimal" Mode="In" />
     <Parameter Name="Notes" Type="text" Mode="In" />
   </Function>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="GetAnimalsByBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BatchID" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="FarmManagementSystemModelStoreContainer">
     <EntitySet Name="AnimalBatches" EntityType="Self.AnimalBatches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
@@ -648,102 +608,101 @@
     <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salaries" EntityType="Self.Salaries" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Animals__AnimalS__42E1EEFE" Association="Self.FK__Animals__AnimalS__42E1EEFE">
+    <AssociationSet Name="FK__Animals__AnimalS__59063A47" Association="Self.FK__Animals__AnimalS__59063A47">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
-    <AssociationSet Name="FK__Animals__AnimalT__3F115E1A" Association="Self.FK__Animals__AnimalT__3F115E1A">
+    <AssociationSet Name="FK__Animals__AnimalT__5535A963" Association="Self.FK__Animals__AnimalT__5535A963">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
-    <AssociationSet Name="FK__Animals__GenderI__40058253" Association="Self.FK__Animals__GenderI__40058253">
+    <AssociationSet Name="FK__Animals__BatchID__59FA5E80" Association="Self.FK__Animals__BatchID__59FA5E80">
+      <End Role="AnimalBatches" EntitySet="AnimalBatches" />
+      <End Role="Animals" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Animals__GenderI__5629CD9C" Association="Self.FK__Animals__GenderI__5629CD9C">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
-    <AssociationSet Name="FK__Animals__HealthS__40F9A68C" Association="Self.FK__Animals__HealthS__40F9A68C">
+    <AssociationSet Name="FK__Animals__HealthS__571DF1D5" Association="Self.FK__Animals__HealthS__571DF1D5">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
-    <AssociationSet Name="FK__Animals__VendorI__41EDCAC5" Association="Self.FK__Animals__VendorI__41EDCAC5">
+    <AssociationSet Name="FK__Animals__VendorI__5812160E" Association="Self.FK__Animals__VendorI__5812160E">
       <End Role="Vendors" EntitySet="Vendors" />
       <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
-    <AssociationSet Name="FK__Assets__VendorID__3C34F16F" Association="Self.FK__Assets__VendorID__3C34F16F">
+    <AssociationSet Name="FK__Assets__VendorID__5070F446" Association="Self.FK__Assets__VendorID__5070F446">
       <End Role="Vendors" EntitySet="Vendors" />
       <End Role="Assets" EntitySet="Assets" />
     </AssociationSet>
-    <AssociationSet Name="FK__Expenses__Linked__531856C7" Association="Self.FK__Expenses__Linked__531856C7">
+    <AssociationSet Name="FK__Expenses__Linked__6A30C649" Association="Self.FK__Expenses__Linked__6A30C649">
       <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
       <End Role="Expenses" EntitySet="Expenses" />
     </AssociationSet>
-    <AssociationSet Name="FK__Expenses__Linked__540C7B00" Association="Self.FK__Expenses__Linked__540C7B00">
+    <AssociationSet Name="FK__Expenses__Linked__6B24EA82" Association="Self.FK__Expenses__Linked__6B24EA82">
       <End Role="Animals" EntitySet="Animals" />
       <End Role="Expenses" EntitySet="Expenses" />
     </AssociationSet>
-    <AssociationSet Name="FK__Feed_Cons__Anima__4C6B5938" Association="Self.FK__Feed_Cons__Anima__4C6B5938">
+    <AssociationSet Name="FK__Feed_Cons__Anima__6383C8BA" Association="Self.FK__Feed_Cons__Anima__6383C8BA">
       <End Role="Animals" EntitySet="Animals" />
       <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
     </AssociationSet>
-    <AssociationSet Name="FK__Feed_Cons__FeedI__4D5F7D71" Association="Self.FK__Feed_Cons__FeedI__4D5F7D71">
+    <AssociationSet Name="FK__Feed_Cons__FeedI__6477ECF3" Association="Self.FK__Feed_Cons__FeedI__6477ECF3">
       <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
       <End Role="Feed_Consumption" EntitySet="Feed_Consumption" />
     </AssociationSet>
-    <AssociationSet Name="FK__Feed_Inve__FeedT__45BE5BA9" Association="Self.FK__Feed_Inve__FeedT__45BE5BA9">
+    <AssociationSet Name="FK__Feed_Inve__FeedT__5CD6CB2B" Association="Self.FK__Feed_Inve__FeedT__5CD6CB2B">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="Feed_Inventory" EntitySet="Feed_Inventory" />
     </AssociationSet>
-    <AssociationSet Name="FK__FeedPurch__FeedT__498EEC8D" Association="Self.FK__FeedPurch__FeedT__498EEC8D">
+    <AssociationSet Name="FK__FeedPurch__FeedT__60A75C0F" Association="Self.FK__FeedPurch__FeedT__60A75C0F">
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
       <End Role="FeedPurchases" EntitySet="FeedPurchases" />
     </AssociationSet>
-    <AssociationSet Name="FK__FeedPurch__Vendo__489AC854" Association="Self.FK__FeedPurch__Vendo__489AC854">
+    <AssociationSet Name="FK__FeedPurch__Vendo__5FB337D6" Association="Self.FK__FeedPurch__Vendo__5FB337D6">
       <End Role="Vendors" EntitySet="Vendors" />
       <End Role="FeedPurchases" EntitySet="FeedPurchases" />
     </AssociationSet>
-    <AssociationSet Name="FK__IdLookupV__IdLoo__19DFD96B" Association="Self.FK__IdLookupV__IdLoo__19DFD96B">
+    <AssociationSet Name="FK__IdLookupV__IdLoo__286302EC" Association="Self.FK__IdLookupV__IdLoo__286302EC">
       <End Role="IdLookup" EntitySet="IdLookup" />
       <End Role="IdLookupValues" EntitySet="IdLookupValues" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__Customer__59C55456" Association="Self.FK__Orders__Customer__59C55456">
+    <AssociationSet Name="FK__Orders__Customer__70DDC3D8" Association="Self.FK__Orders__Customer__70DDC3D8">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__Producti__5AB9788F" Association="Self.FK__Orders__Producti__5AB9788F">
+    <AssociationSet Name="FK__Orders__Producti__71D1E811" Association="Self.FK__Orders__Producti__71D1E811">
       <End Role="Production" EntitySet="Production" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Productio__Anima__503BEA1C" Association="Self.FK__Productio__Anima__503BEA1C">
+    <AssociationSet Name="FK__Productio__Anima__6754599E" Association="Self.FK__Productio__Anima__6754599E">
       <End Role="Animals" EntitySet="Animals" />
       <End Role="Production" EntitySet="Production" />
     </AssociationSet>
-    <AssociationSet Name="FK__RolePermi__Permi__30C33EC3" Association="Self.FK__RolePermi__Permi__30C33EC3">
+    <AssociationSet Name="FK__RolePermi__Permi__3F466844" Association="Self.FK__RolePermi__Permi__3F466844">
       <End Role="Permissions" EntitySet="Permissions" />
       <End Role="RolePermissions" EntitySet="RolePermissions" />
     </AssociationSet>
-    <AssociationSet Name="FK__RolePermi__RoleI__2FCF1A8A" Association="Self.FK__RolePermi__RoleI__2FCF1A8A">
+    <AssociationSet Name="FK__RolePermi__RoleI__3E52440B" Association="Self.FK__RolePermi__RoleI__3E52440B">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="RolePermissions" EntitySet="RolePermissions" />
     </AssociationSet>
-    <AssociationSet Name="FK__Salaries__Worker__5F7E2DAC" Association="Self.FK__Salaries__Worker__5F7E2DAC">
+    <AssociationSet Name="FK__Salaries__Worker__76969D2E" Association="Self.FK__Salaries__Worker__76969D2E">
       <End Role="Workers" EntitySet="Workers" />
       <End Role="Salaries" EntitySet="Salaries" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserRoles__RoleI__2BFE89A6" Association="Self.FK__UserRoles__RoleI__2BFE89A6">
+    <AssociationSet Name="FK__UserRoles__RoleI__3A81B327" Association="Self.FK__UserRoles__RoleI__3A81B327">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserRoles__UserI__2B0A656D" Association="Self.FK__UserRoles__UserI__2B0A656D">
+    <AssociationSet Name="FK__UserRoles__UserI__398D8EEE" Association="Self.FK__UserRoles__UserI__398D8EEE">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Animals_BatchID" Association="Self.FK_Animals_BatchID">
-      <End Role="AnimalBatches" EntitySet="AnimalBatches" />
-      <End Role="Animals" EntitySet="Animals" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

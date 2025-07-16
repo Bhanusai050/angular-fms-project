@@ -20,5 +20,8 @@ namespace FmsAPI.Data
         public Nullable<decimal> Amount { get; set; }
         public Nullable<int> LinkedFeedID { get; set; }
         public Nullable<int> LinkedAnimalID { get; set; }
+    
+        public virtual Animal Animal { get; set; }
+        public virtual Feed_Inventory Feed_Inventory { get; set; }
     }
 }

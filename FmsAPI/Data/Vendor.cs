@@ -14,11 +14,27 @@ namespace FmsAPI.Data
     
     public partial class Vendor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vendor()
+        {
+            this.Animals = new HashSet<Animal>();
+            this.Assets = new HashSet<Asset>();
+            this.FeedPurchases = new HashSet<FeedPurchas>();
+        }
+    
         public int VendorID { get; set; }
         public string VendorName { get; set; }
+        public string VendorType { get; set; }
         public string Category { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Location { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Animal> Animals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asset> Assets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FeedPurchas> FeedPurchases { get; set; }
     }
 }

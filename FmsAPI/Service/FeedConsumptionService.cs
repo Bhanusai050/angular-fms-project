@@ -1,4 +1,4 @@
-﻿using FmsAPI.Data;
+using FmsAPI.Data;
 using FmsAPI.Interface;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace FmsAPI.Service
 {
     public class FeedConsumptionService: IFeedConsumptionService
     {
-        FarmManagementSystemEntities context = new FarmManagementSystemEntities();
+    FarmManagementSystemEnities context = new FarmManagementSystemEnities();
 
         public List<Feed_Consumption> GetFeedConsumptions()
         {

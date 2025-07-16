@@ -6,10 +6,11 @@ import { AnimalsComponent } from './animals/animals.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { FeedInventoryComponent } from './feed-inventory/feed-inventory.component';
-import { InvestmentComponent } from './investments/investments.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductionComponent } from '../production/production.component';
 import { VendorComponent } from '../vendor/vendor.component';
+
+import { AnimalBatchesComponent } from './animal-batches/animal-batches.component';
 import { RbacGuard } from '../../rbac.guard';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+<<<<<<< HEAD
       {
         path: '',
         component: DashboardComponent,
@@ -31,6 +33,16 @@ const routes: Routes = [
           { path: 'vendor', component: VendorComponent, canActivate: [RbacGuard], data: { permission: 'ViewVendor' } },
         ]
       }
+=======
+      { path: 'animals', component: AnimalsComponent, canActivate: [RbacGuard], data: { permission: 'ViewAnimals' } },
+      { path: 'customers', component: CustomersComponent, canActivate: [RbacGuard], data: { permission: 'ViewCustomers' } },
+      { path: 'expenses', component: ExpensesComponent, canActivate: [RbacGuard], data: { permission: 'ViewExpenses' } },
+      { path: 'feed-inventory', component: FeedInventoryComponent, canActivate: [RbacGuard], data: { permission: 'ViewFeedInventory' } },
+      { path: 'orders', component: OrdersComponent, canActivate: [RbacGuard], data: { permission: 'ViewOrders' } },
+      { path: 'production', component: ProductionComponent, canActivate: [RbacGuard], data: { permission: 'ViewProduction' } },
+      { path: 'vendor', component: VendorComponent, canActivate: [RbacGuard], data: { permission: 'ViewVendor' } },
+      { path: 'animalbatches', component: AnimalBatchesComponent, canActivate: [RbacGuard], data: { permission: 'ViewOrders' } },
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
     ]
   }
 ];
@@ -40,3 +52,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class DashboardRoutingModule {}
+
+

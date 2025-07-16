@@ -15,7 +15,7 @@ namespace FmsAPI
         {
 			var container = new UnityContainer();
             container.RegisterType<IAnimalSerivce, AnimalService>();
-            container.RegisterType<FarmManagementSystemEntities>();
+            container.RegisterType<FarmManagementSystemEnities>();
             container.RegisterType<ICompanyService, CompanyService>();
             container.RegisterType<IVendorService, VendorService>();
             container.RegisterType<IIdLookupService, IdLookupService>();
@@ -37,6 +37,8 @@ namespace FmsAPI
             container.RegisterType<ISalaryService, SalaryService>();
             container.RegisterType<IContactMessageService, ContactMessageService>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IFeedInventoryService, FeedInventoryService>();
+            container.RegisterType<IAnimalBatchService, AnimalBatchService>();
 
 
 
@@ -51,12 +53,14 @@ namespace FmsAPI
 
 
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
 
-            // e.g. container.RegisterType<ITestService, TestService>();
 
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+      // register all your components with the container here
+      // it is NOT necessary to register your controllers
+
+      // e.g. container.RegisterType<ITestService, TestService>();
+
+      GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }

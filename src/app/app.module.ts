@@ -21,9 +21,9 @@ import { FeedInventoryComponent } from './Dashboard/dashboard/feed-inventory/fee
 import { CustomersComponent } from './Dashboard/dashboard/customers/customers.component';
 import { VendorComponent } from './Dashboard/vendor/vendor.component';
 import { OrdersComponent } from './Dashboard/dashboard/orders/orders.component';
-import { InvestmentComponent } from './Dashboard/dashboard/investments/investments.component';
 import { ProductionComponent } from './Dashboard/production/production.component';
 import { ExpensesComponent } from './Dashboard/dashboard/expenses/expenses.component';
+import { investmentsComponent } from './Dashboard/dashboard/investments/investments.component';
 
 
 

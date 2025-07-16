@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
 import { ApiService } from '../../../api.service';
 
 @Component({
@@ -6,6 +10,7 @@ import { ApiService } from '../../../api.service';
   templateUrl: './animal-batches.component.html'
 })
 export class AnimalBatchesComponent implements OnInit {
+<<<<<<< HEAD
   // Add method for adding a new batch
   onSubmit(batchForm: any) {
     if (batchForm.invalid) {
@@ -48,6 +53,30 @@ export class AnimalBatchesComponent implements OnInit {
     this.getAnimalBatches();
   }
 
+=======
+  batchForm!: FormGroup;
+  isvisible: boolean = false; // Table/grid is default view
+  isEditing: boolean = false;
+  editIndex: number = -1;
+  animalBatchesData: any[] = [];
+
+  constructor(private fb: FormBuilder, private api: ApiService) {}
+
+  ngOnInit(): void {
+    this.createform();
+    this.getAnimalBatches();
+  }
+
+  createform(){
+     this.batchForm = this.fb.group({
+      BatchID: [0],
+      BatchName: ['', [Validators.required, Validators.maxLength(50)]],
+      PurchasedDate: ['', Validators.required],
+      Purpose: ['', [Validators.required, Validators.maxLength(50)]]
+    });
+  }
+
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
   getAnimalBatches() {
     this.api.getAnimalBatches().subscribe({
       next: (data) => {
@@ -59,9 +88,74 @@ export class AnimalBatchesComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   onAdd() { this.isvisible = true; }
   onCancel() { this.isvisible = false; }
   onEdit(batch: any) { /* Patch form and set isvisible = true */ }
+=======
+  onSubmit() {
+    debugger;
+    if (this.batchForm.invalid) {
+      this.batchForm.markAllAsTouched();
+      return;
+    }
+    const payload = this.batchForm.value;
+    if (this.isEditing && this.editIndex > -1 && payload.BatchID) {
+      // Edit
+      this.api.updateAnimalBatch(payload.BatchID, payload).subscribe({
+        next: () => {
+          this.batchForm.reset();
+          this.isvisible = false;
+          this.isEditing = false;
+          this.editIndex = -1;
+          this.getAnimalBatches();
+        },
+        error: () => {
+          alert('Failed to update batch');
+        }
+      });
+    } else {
+      // Add
+      this.api.addAnimalBatch(payload).subscribe({
+        next: () => {
+          this.batchForm.reset();
+          this.isvisible = false;
+          this.getAnimalBatches();
+        },
+        error: () => {
+          alert('Failed to add batch');
+        }
+      });
+    }
+  }
+
+  onAdd() {
+    this.isvisible = true;
+    this.isEditing = false;
+    this.editIndex = -1;
+    this.createform();
+  }
+
+  onCancel() {
+    this.isvisible = false;
+    this.isEditing = false;
+    this.editIndex = -1;
+    this.batchForm.reset();
+  }
+
+  onEdit(batch: any) {
+    this.editIndex = this.animalBatchesData.indexOf(batch);
+     const formattedDate = batch.PurchasedDate?.split('T')[0];
+
+    this.batchForm.patchValue({
+    ...batch,
+    PurchasedDate: formattedDate
+  });
+    this.isvisible = true;
+    this.isEditing = true;
+  }
+
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
   onDelete(batch: any) {
     this.api.deleteAnimalBatch(batch.BatchID).subscribe({
       next: () => { this.getAnimalBatches(); },

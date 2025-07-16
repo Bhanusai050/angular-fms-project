@@ -14,7 +14,16 @@ namespace FmsAPI.Data
     
     public partial class IdLookup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IdLookup()
+        {
+            this.IdLookupValues = new HashSet<IdLookupValue>();
+        }
+    
         public int IdLookupID { get; set; }
         public string LookupName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IdLookupValue> IdLookupValues { get; set; }
     }
 }

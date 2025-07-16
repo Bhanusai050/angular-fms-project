@@ -101,11 +101,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let e of expensesData">
-          <td>{{ e.expenseId }}</td>
-          <td>{{ e.category }}</td>
+          <td>{{ e.ExpenseID }}</td>
+          <td>{{ e.Type }}</td>
           <td>{{ e.description }}</td>
-          <td>{{ e.amount }}</td>
-          <td>{{ e.date | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ e.Amount }}</td>
+          <td>{{ e.Date | date: 'yyyy-MM-dd' }}</td>
           <td>{{ e.paymentMode }}</td>
           <td>
             <button class="btn btn-warning btn-sm me-2" (click)="onEdit(e)">

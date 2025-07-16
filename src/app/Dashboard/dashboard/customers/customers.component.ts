@@ -2,6 +2,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../api.service';
 
+export interface CustomerApiResponse {
+  CustomerID: number;
+  FullName: string;
+  PhoneNumber: string;
+  Email: string;
+  Location: string;
+}
+
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html'
@@ -17,8 +25,8 @@ export class CustomersComponent implements OnInit {
   ngOnInit(): void {
     this.customerForm = this.fb.group({
       customerId: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      FullName: ['', Validators.required],
+      PhoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required]
     });
@@ -27,15 +35,20 @@ export class CustomersComponent implements OnInit {
 
   getCustomers() {
     this.api.getCustomers().subscribe({
+<<<<<<< HEAD
       next: (data) => {
         // Map backend fields to frontend fields for display
         this.customerData = data.map((c: any) => ({
+=======
+      next: (data: CustomerApiResponse[]) => {
+        this.customerData = data.map((c) => ({
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
           customerId: c.CustomerID,
-          name: c.Fullname,
-          phone: c.Phonenumber,
+          FullName: c.FullName,
+          PhoneNumber: c.PhoneNumber,
           email: c.Email,
           address: c.Location,
-          CustomerID: c.CustomerID // keep original for edit/delete
+          CustomerID: c.CustomerID
         }));
       },
       error: (err) => {
@@ -54,8 +67,8 @@ export class CustomersComponent implements OnInit {
     // Map frontend fields to backend property names
     const customerPayload = {
       CustomerID: formValue.customerId,
-      Fullname: formValue.name,
-      Phonenumber: formValue.phone,
+      FullName: formValue.FullName,
+      PhoneNumber: formValue.PhoneNumber,
       Email: formValue.email,
       Location: formValue.address
     };
@@ -64,7 +77,19 @@ export class CustomersComponent implements OnInit {
       const customerId = this.customerData[this.editIndex]?.CustomerID;
       if (customerId) {
         this.api.updateCustomer(customerId, customerPayload).subscribe({
+<<<<<<< HEAD
           next: (res) => {
+=======
+          next: (res: CustomerApiResponse) => {
+            this.customerData[this.editIndex] = {
+              customerId: res.CustomerID,
+              FullName: res.FullName,
+              PhoneNumber: res.PhoneNumber,
+              email: res.Email,
+              address: res.Location,
+              CustomerID: res.CustomerID
+            };
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
             this.customerForm.reset();
             this.isvisible = false;
             this.isEditing = false;
@@ -81,7 +106,19 @@ export class CustomersComponent implements OnInit {
       }
     } else {
       this.api.addCustomer(customerPayload).subscribe({
+<<<<<<< HEAD
         next: (res) => {
+=======
+        next: (res: CustomerApiResponse) => {
+          this.customerData.push({
+            customerId: res.CustomerID,
+            FullName: res.FullName,
+            PhoneNumber: res.PhoneNumber,
+            email: res.Email,
+            address: res.Location,
+            CustomerID: res.CustomerID
+          });
+>>>>>>> f9925068b714aab5fcc439a2d974ecfa99fe5895
           this.customerForm.reset();
           this.isvisible = false;
           this.isEditing = false;
@@ -115,8 +152,8 @@ export class CustomersComponent implements OnInit {
     // Patch only frontend fields
     this.customerForm.patchValue({
       customerId: customer.customerId,
-      name: customer.name,
-      phone: customer.phone,
+      FullName: customer.FullName,
+      PhoneNumber: customer.PhoneNumber,
       email: customer.email,
       address: customer.address
     });

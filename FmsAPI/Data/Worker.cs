@@ -14,10 +14,19 @@ namespace FmsAPI.Data
     
     public partial class Worker
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Worker()
+        {
+            this.Salaries = new HashSet<Salary>();
+        }
+    
         public int WorkerID { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
         public string ContactInfo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Salary> Salaries { get; set; }
     }
 }

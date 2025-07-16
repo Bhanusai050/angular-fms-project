@@ -6,20 +6,20 @@
       <div class="row g-3">
 
         <div class="col-md-4">
-  <label for="order" class="form-label">Order</label>
-  <input type="text" class="form-control" id="order" formControlName="order"
-         [ngClass]="{ 'is-invalid': orderForm.get('order')?.invalid && orderForm.get('order')?.touched }" />
-  <div *ngIf="orderForm.get('order')?.touched && orderForm.get('order')?.invalid" class="text-danger">
+  <label for="OrderID" class="form-label">Order</label>
+  <input type="text" class="form-control" id="OrderID" formControlName="OrderID"
+         [ngClass]="{ 'is-invalid': orderForm.get('OrderID')?.invalid && orderForm.get('OrderID')?.touched }" />
+  <div *ngIf="orderForm.get('OrderID')?.touched && orderForm.get('OrderID')?.invalid" class="text-danger">
     <small>Order is required.</small>
   </div>
 </div>
 
 
         <div class="col-md-4">
-  <label for="customerName" class="form-label">Customer Name</label>
-  <input type="text" class="form-control" id="customerName" formControlName="customerName"
-         [ngClass]="{ 'is-invalid': orderForm.get('customerName')?.invalid && orderForm.get('customerName')?.touched }" />
-  <div *ngIf="orderForm.get('customerName')?.touched && orderForm.get('customerName')?.invalid" class="text-danger">
+  <label for="CustomerID" class="form-label">Customer Name</label>
+  <input type="text" class="form-control" id="CustomerID" formControlName="CustomerID"
+         [ngClass]="{ 'is-invalid': orderForm.get('CustomerID')?.invalid && orderForm.get('CustomerID')?.touched }" />
+  <div *ngIf="orderForm.get('CustomerID')?.touched && orderForm.get('CustomerID')?.invalid" class="text-danger">
     <small>Customer name is required.</small>
   </div>
 </div>
@@ -68,15 +68,15 @@
 
 
         <div class="col-md-4">
-  <label for="production" class="form-label">Production</label>
-  <select class="form-select" id="production" formControlName="production"
-          [ngClass]="{ 'is-invalid': orderForm.get('production')?.invalid && orderForm.get('production')?.touched }">
+  <label for="ProductionID" class="form-label">Production</label>
+  <select class="form-select" id="ProductionID" formControlName="ProductionID"
+          [ngClass]="{ 'is-invalid': orderForm.get('ProductionID')?.invalid && orderForm.get('ProductionID')?.touched }">
     <option value="">-- Select --</option>
     <option value="Milk">Milk</option>
     <option value="Egg">Egg</option>
     <option value="Meat">Meat</option>
   </select>
-  <div *ngIf="orderForm.get('production')?.touched && orderForm.get('production')?.invalid" class="text-danger">
+  <div *ngIf="orderForm.get('ProductionID')?.touched && orderForm.get('ProductionID')?.invalid" class="text-danger">
     <small>Production is required.</small>
   </div>
 </div>
@@ -147,12 +147,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of ordersData">
-          <td>{{ order.order }}</td>
-          <td>{{ order.customerName }}</td>
+          <td>{{ order.OrderID }}</td>
+          <td>{{ order.CustomerID }}</td>
           <td>{{ order.orderDate | date: 'yyyy-MM-dd' }}</td>
           <td>{{ order.paymentStatus }}</td>
           <td>{{ order.orderStatus }}</td>
-          <td>{{ order.production }}</td>
+          <td>{{ order.ProductionID }}</td>
           <td>{{ order.quantity }}</td>
           <td>{{ order.unitPrice }}</td>
           <td>{{ order.totalAmount }}</td>
